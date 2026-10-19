@@ -3,6 +3,8 @@ import type { ReactNode } from "react";
 import { Reveal, SplitHeadline } from "@/components/motion/primitives";
 import { StatementReveal } from "./statement";
 
+export { Wordmark } from "./wordmark";
+
 export function Section({
   children,
   id,

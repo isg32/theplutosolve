@@ -4,6 +4,7 @@ import { Button, Section, SectionHeader, Statement } from "@/components/ui";
 import { CountUp, Magnetic, Reveal, SplitHeadline, Stagger, StaggerItem } from "@/components/motion/primitives";
 import { ClientStrip, Descriptor, HeroArt } from "@/components/art/misc";
 import { ScaleRange } from "@/components/art/scale-range";
+import { Pluto } from "@/components/art/pluto";
 import { IdeaScene } from "@/components/art/idea-scene";
 import { CapabilityGlyph } from "@/components/art/capability-glyph";
 import { ProcessSteps } from "@/components/art/process";
@@ -62,6 +63,10 @@ export default function Home() {
           </Reveal>
         </div>
         <ScaleRange />
+        <Reveal className="pluto-note" y={8}>
+          <Pluto size={28} />
+          <p className="m-0">{scale.pluto}</p>
+        </Reveal>
         <Statement lines={scale.closing} className="scale__closing" />
       </Section>
 

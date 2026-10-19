@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import { brand, ctas, nav } from "@/lib/content";
 import { EASE, useReducedMotionSafe } from "@/components/motion/primitives";
 import { ThemeToggle } from "./theme-toggle";
+import { Wordmark } from "@/components/ui/wordmark";
 
 export function SiteNav() {
   const pathname = usePathname();
@@ -51,7 +52,7 @@ export function SiteNav() {
       >
         <nav className="ps-container site-nav" aria-label="Main">
           <Link className="ps-wordmark" href="/" onClick={() => setOpen(false)}>
-            {brand.name}
+            <Wordmark />
           </Link>
           <ul onPointerLeave={() => setHover(null)}>
             {nav.map((n) => (

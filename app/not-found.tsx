@@ -1,7 +1,7 @@
 import { Page } from "@/components/layout/page";
 import { Button } from "@/components/ui";
-import { CoverBlocks } from "@/components/art/cover-blocks";
-import { ctas } from "@/lib/content";
+import { PlutoOrbit } from "@/components/art/pluto";
+import { ctas, plutoJokes } from "@/lib/content";
 
 export default function NotFound() {
   return (
@@ -11,6 +11,7 @@ export default function NotFound() {
           <div className="page-hero__copy">
             <p className="ps-eyebrow">404</p>
             <h1 className="ps-display">This page isn&apos;t part of the system.</h1>
+            <p className="ps-lead">{plutoJokes.notFound}</p>
             <div className="hero__ctas">
               <Button href="/">Return to PlutoSolve</Button>
               <Button href={ctas.build.href} variant="secondary">
@@ -18,7 +19,7 @@ export default function NotFound() {
               </Button>
             </div>
           </div>
-          <CoverBlocks className="page-hero__art" />
+          <PlutoOrbit />
         </div>
       </section>
     </Page>

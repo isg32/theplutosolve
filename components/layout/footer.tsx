@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { brand, footer } from "@/lib/content";
-import { Eyebrow } from "@/components/ui";
+import { brand, footer, plutoJokes } from "@/lib/content";
+import { Pluto } from "@/components/art/pluto";
+import { Eyebrow, Wordmark } from "@/components/ui";
 import { GiantWordmark } from "./giant-wordmark";
 
 export function Footer() {
@@ -9,7 +10,9 @@ export function Footer() {
       <div className="ps-container">
         <div className="site-footer__top">
           <div>
-            <p className="ps-wordmark">{brand.name}</p>
+            <p className="ps-wordmark">
+              <Wordmark />
+            </p>
             <p className="site-footer__social">{brand.social}</p>
             <Eyebrow parts={brand.descriptor} />
           </div>
@@ -32,8 +35,14 @@ export function Footer() {
             ))}
           </div>
         </div>
-        <GiantWordmark text={brand.name} />
-        <p className="site-footer__legal">{footer.copyright}</p>
+        <GiantWordmark text={brand.name} accentFrom={brand.name.indexOf("Solve")} />
+        <div className="site-footer__legal">
+          <p>{footer.copyright}</p>
+          <p className="pluto-footnote">
+            <Pluto size={16} />
+            {plutoJokes.footer}
+          </p>
+        </div>
       </div>
     </footer>
   );

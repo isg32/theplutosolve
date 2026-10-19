@@ -3,6 +3,7 @@ import { Page } from "@/components/layout/page";
 import { Button, Section, SectionHeader, Statement } from "@/components/ui";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/primitives";
 import { ClientStrip, VisionFlow } from "@/components/art/misc";
+import { Pluto } from "@/components/art/pluto";
 import { FinalCta, PageHero } from "@/components/sections";
 import { about, clients, ctas, vision } from "@/lib/content";
 
@@ -49,7 +50,8 @@ export default function About() {
         </div>
       </Section>
 
-      <section className="ps-section ps-inverse" aria-label={vision.eyebrow}>
+      <section className="ps-section ps-inverse vision-band" aria-label={vision.eyebrow}>
+        <Pluto size={88} charon className="vision-band__pluto" />
         <div className="ps-container vision">
           <SectionHeader eyebrow={vision.eyebrow} title={vision.headline} lead={vision.intro} />
           <div>

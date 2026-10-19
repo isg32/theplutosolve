@@ -44,6 +44,59 @@
 .ps-section-header .ps-lead { margin-top: var(--space-6); }
 .ps-section-header + * { margin-top: var(--space-8); }
 
+/* Wordmark: "Solve" in the signal accent (owner's choice, overriding the all-ink wordmark rule). */
+.wordmark-accent { color: var(--signal); }
+
+/* ---------- Pluto ---------- */
+.pluto { position: relative; display: inline-block; flex-shrink: 0; vertical-align: middle; }
+.pluto__body,
+.pluto__charon { display: block; border-radius: 50%; }
+.pluto.has-charon .pluto__body { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+.pluto__orbit { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.pluto__orbit circle { fill: none; stroke: var(--line-strong); stroke-width: 1; stroke-dasharray: 1.5 4; vector-effect: non-scaling-stroke; }
+.pluto__charon-track {
+  position: absolute;
+  inset: 8%;
+  animation: pluto-charon 9s linear infinite;
+}
+.pluto__charon { position: absolute; right: 0; top: 50%; transform: translate(50%, -50%); }
+@keyframes pluto-charon { to { transform: rotate(360deg); } }
+
+.pluto-note {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin: calc(-1 * var(--space-8)) 0 var(--space-16);
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--ink-muted);
+}
+.pluto-footnote { display: inline-flex; align-items: center; gap: var(--space-2); }
+
+.pluto-orbit { position: relative; width: 480px; height: 320px; }
+.pluto-orbit__stage { position: absolute; left: 0; top: 0; width: 480px; height: 320px; transform-origin: left top; }
+.pluto-orbit__path { position: absolute; inset: 0; width: 480px; height: 320px; }
+.pluto-orbit__path ellipse { fill: none; stroke: var(--line-strong); stroke-width: 1; stroke-dasharray: 2 6; }
+.pluto-orbit__planet {
+  position: absolute;
+  left: 0;
+  top: 0;
+  offset-path: path("M 20 160 A 220 110 0 1 1 460 160 A 220 110 0 1 1 20 160");
+  offset-rotate: 0deg;
+  animation: pluto-orbit 40s linear infinite;
+}
+@keyframes pluto-orbit { from { offset-distance: 0%; } to { offset-distance: 100%; } }
+@media (max-width: 520px) {
+  .pluto-orbit { width: 336px; height: 224px; }
+  .pluto-orbit__stage { transform: scale(0.7); }
+}
+
+.vision-band { position: relative; overflow: clip; }
+.vision-band__pluto { position: absolute; top: var(--space-12); right: var(--space-12); }
+@media (max-width: 900px) {
+  .vision-band__pluto { top: auto; bottom: var(--space-6); right: var(--space-4); width: 64px; height: 64px; }
+}
+
 /* Let multi-part eyebrows (Strategy × Technology × …) wrap between parts. */
 .ps-eyebrow > span { display: inline-block; }
 
@@ -240,6 +293,7 @@
   transition: color 180ms ease-out;
 }
 .site-footer__cols a:hover { color: var(--signal); }
+.site-footer__legal p { margin: 0; }
 .giant-wordmark {
   margin: var(--space-16) 0 0;
   font-size: clamp(64px, 17.5vw, 248px);
@@ -250,6 +304,10 @@
   white-space: nowrap;
 }
 .site-footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-6);
   margin: var(--space-6) 0 0;
   padding-top: var(--space-4);
   border-top: 1px solid var(--line);

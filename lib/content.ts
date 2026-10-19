@@ -51,6 +51,13 @@ export const scale = {
   lead: "Some of our work starts with a single landing page or one campaign. Some of it runs across an entire organisation.",
   body: "We take on the smallest projects as readily as the largest — and give each one the same attention.",
   closing: ["If it matters to your business,", "it matters to us."],
+  pluto: "Pluto was demoted for being small. We don't do that to projects.",
+};
+
+// Light touches of humour around the name. Not in the PDF.
+export const plutoJokes = {
+  footer: "Pluto is still a planet here.",
+  notFound: "Pluto knows the feeling.",
 };
 
 export const idea = {

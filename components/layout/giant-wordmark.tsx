@@ -4,7 +4,7 @@ import { motion } from "motion/react";
 import { EASE, useReducedMotionSafe } from "@/components/motion/primitives";
 
 /** Footer-width wordmark; letters rise out of a mask one after another. */
-export function GiantWordmark({ text }: { text: string }) {
+export function GiantWordmark({ text, accentFrom }: { text: string; accentFrom?: number }) {
   const reduce = useReducedMotionSafe();
   return (
     <motion.p
@@ -15,7 +15,7 @@ export function GiantWordmark({ text }: { text: string }) {
       viewport={{ once: true, amount: 0.6 }}
     >
       {text.split("").map((ch, i) => (
-        <span key={i} className="split-mask">
+        <span key={i} className={`split-mask${accentFrom !== undefined && i >= accentFrom ? " wordmark-accent" : ""}`}>
           <motion.span
             className="inline-block"
             variants={{ hidden: { y: "105%" }, show: { y: "0%" } }}

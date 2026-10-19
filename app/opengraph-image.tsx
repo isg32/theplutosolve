@@ -53,7 +53,9 @@ export default async function OpengraphImage() {
           />
         ))}
         <div style={{ position: "absolute", left: 64, bottom: 72, display: "flex", flexDirection: "column" }}>
-          <div style={{ fontSize: 104, fontWeight: 700, letterSpacing: -3, color: "#0c0c0d" }}>{brand.name}</div>
+          <div style={{ display: "flex", fontSize: 104, fontWeight: 700, letterSpacing: -3, color: "#0c0c0d" }}>
+            Pluto<span style={{ color: "#b8370b" }}>Solve</span>
+          </div>
           <div style={{ fontSize: 28, color: "#57575b", marginTop: 12 }}>{brand.social}</div>
         </div>
       </div>
