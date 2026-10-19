@@ -1,0 +1,70 @@
+@import "tailwindcss";
+@import "./styles/tokens.css" layer(base);
+@import "./styles/bundle.css" layer(components);
+@import "./styles/site.css" layer(components);
+
+@theme inline {
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-surface-sunken: var(--surface-sunken);
+  --color-surface-inverse: var(--surface-inverse);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-subtle: var(--ink-subtle);
+  --color-ink-inverse: var(--ink-inverse);
+  --color-signal: var(--signal);
+  --color-signal-soft: var(--signal-soft);
+  --color-on-signal: var(--on-signal);
+  --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+}
+
+@layer base {
+  /* No-JS fallback: follow the OS until the theme script sets data-theme. */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+      --surface: #0c0c0d;
+      --surface-raised: #161618;
+      --surface-sunken: #1f1f22;
+      --surface-inverse: #f2f2ef;
+      --line: #2a2a2e;
+      --line-strong: #6a6a70;
+      --ink: #f2f2ef;
+      --ink-muted: #a6a6ab;
+      --ink-subtle: #8d8d93;
+      --ink-inverse: #0c0c0d;
+      --signal: #ff6a3d;
+      --signal-soft: #2e140b;
+      --on-signal: #0c0c0d;
+    }
+  }
+
+  html {
+    background: var(--surface);
+    color-scheme: light;
+  }
+  html[data-theme="dark"] {
+    color-scheme: dark;
+  }
+  body {
+    background: var(--surface);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 26px;
+    -webkit-font-smoothing: antialiased;
+    transition: background-color 300ms ease-out, color 300ms ease-out;
+  }
+  ::selection {
+    background: var(--signal);
+    color: var(--on-signal);
+  }
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+  }
+}

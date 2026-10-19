@@ -1,0 +1,62 @@
+/* PlutoSolve — generated from tokens.json */
+:root, [data-theme="light"] {
+  --surface: #f6f6f4;
+  --surface-raised: #ffffff;
+  --surface-sunken: #ededea;
+  --surface-inverse: #0c0c0d;
+  --line: #e1e1dd;
+  --line-strong: #86868a;
+  --ink: #0c0c0d;
+  --ink-muted: #57575b;
+  --ink-subtle: #6b6b70;
+  --ink-inverse: #f6f6f4;
+  --signal: #b8370b;
+  --signal-soft: #fbe9e1;
+  --on-signal: #ffffff;
+  --focus-ring: var(--signal);
+}
+[data-theme="dark"] {
+  --surface: #0c0c0d;
+  --surface-raised: #161618;
+  --surface-sunken: #1f1f22;
+  --surface-inverse: #f2f2ef;
+  --line: #2a2a2e;
+  --line-strong: #6a6a70;
+  --ink: #f2f2ef;
+  --ink-muted: #a6a6ab;
+  --ink-subtle: #8d8d93;
+  --ink-inverse: #0c0c0d;
+  --signal: #ff6a3d;
+  --signal-soft: #2e140b;
+  --on-signal: #0c0c0d;
+  --focus-ring: var(--signal);
+}
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+  --space-32: 128px;
+  --radius-0: 0px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --content-max: 1200px;
+  --text-max: 640px;
+  --control-height: 48px;
+  --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.display { font-family: var(--font-sans); font-size: 72px; line-height: 76px; font-weight: 700; letter-spacing: -0.03em; }
+.heading-1 { font-family: var(--font-sans); font-size: 48px; line-height: 54px; font-weight: 700; letter-spacing: -0.02em; }
+.heading-2 { font-family: var(--font-sans); font-size: 32px; line-height: 40px; font-weight: 700; letter-spacing: -0.015em; }
+.heading-3 { font-family: var(--font-sans); font-size: 20px; line-height: 26px; font-weight: 700; letter-spacing: 0.01em; }
+.lead { font-family: var(--font-sans); font-size: 20px; line-height: 30px; font-weight: 400; }
+.body { font-family: var(--font-sans); font-size: 16px; line-height: 26px; font-weight: 400; }
+.body-strong { font-family: var(--font-sans); font-size: 16px; line-height: 26px; font-weight: 700; }
+.small { font-family: var(--font-sans); font-size: 14px; line-height: 22px; font-weight: 400; }
+.label { font-family: var(--font-sans); font-size: 15px; line-height: 20px; font-weight: 700; }
+.eyebrow { font-family: var(--font-sans); font-size: 12px; line-height: 16px; font-weight: 700; letter-spacing: 0.12em; }

@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head><link rel="stylesheet" href="../../tokens/tokens.css"><link rel="stylesheet" href="../bundle.css"><meta charset="utf-8"><title>PlutoSolve — cover</title>
+<style>
+  html,body{margin:0;background:var(--surface)}
+  .cv{position:relative;width:960px;height:288px;overflow:hidden;background:var(--surface);font-family:var(--font-sans)}
+  .cv svg{position:absolute;inset:0}
+  .slab{fill:var(--surface-inverse)}
+  .sig{fill:var(--signal)}
+  .tint{fill:var(--line-strong)}
+  .dot{fill:var(--line-strong)}
+  .node{fill:var(--signal)}
+  .edge{stroke:var(--signal);stroke-width:2;fill:none}
+  .txt{position:absolute;left:48px;bottom:48px;max-width:440px}
+  .name{margin:0;font-size:72px;line-height:.95;font-weight:700;letter-spacing:-.03em;color:var(--ink)}
+  .tag{margin:16px 0 0;font-size:14px;line-height:22px;color:var(--ink-muted)}
+</style></head>
+<body>
+<div class="cv">
+  <!--
+    blocks: surface-inverse slab 288x288 (3 x space-24), signal 96x192 (space-24 x 2), line-strong 96x96 (space-24); radius-0 throughout.
+    arrangement: one tall slab bleeding top and bottom, with two staggered satellites stepping off its right edge.
+    pattern: dot grid with a node graph, from "precise, technical": the brief's nodes → flows → connected systems. A 6x6 dot field at space-12 pitch inside the slab; three signal nodes joined by an orthogonal signal edge that runs out of the slab into the signal block.
+    steps and radii: space-12 (48px) pitch, space-6 (24px) inset, space-24 (96px) block module, radius-0.
+  -->
+  <svg width="960" height="288" viewBox="0 0 960 288" aria-hidden="true">
+    <rect class="slab" x="480" y="0" width="288" height="288"/>
+    <rect class="sig" x="768" y="96" width="96" height="192"/>
+    <rect class="tint" x="864" y="0" width="96" height="96"/>
+    <g>
+      <circle class="dot" cx="504" cy="24" r="2"/><circle class="dot" cx="552" cy="24" r="2"/><circle class="dot" cx="600" cy="24" r="2"/><circle class="dot" cx="648" cy="24" r="2"/><circle class="dot" cx="696" cy="24" r="2"/><circle class="dot" cx="744" cy="24" r="2"/>
+      <circle class="dot" cx="504" cy="72" r="2"/><circle class="dot" cx="600" cy="72" r="2"/><circle class="dot" cx="696" cy="72" r="2"/><circle class="dot" cx="744" cy="72" r="2"/>
+      <circle class="dot" cx="504" cy="120" r="2"/><circle class="dot" cx="552" cy="120" r="2"/><circle class="dot" cx="600" cy="120" r="2"/><circle class="dot" cx="648" cy="120" r="2"/><circle class="dot" cx="696" cy="120" r="2"/><circle class="dot" cx="744" cy="120" r="2"/>
+      <circle class="dot" cx="504" cy="168" r="2"/><circle class="dot" cx="552" cy="168" r="2"/><circle class="dot" cx="600" cy="168" r="2"/><circle class="dot" cx="696" cy="168" r="2"/><circle class="dot" cx="744" cy="168" r="2"/>
+      <circle class="dot" cx="504" cy="216" r="2"/><circle class="dot" cx="552" cy="216" r="2"/><circle class="dot" cx="600" cy="216" r="2"/><circle class="dot" cx="648" cy="216" r="2"/><circle class="dot" cx="696" cy="216" r="2"/><circle class="dot" cx="744" cy="216" r="2"/>
+      <circle class="dot" cx="504" cy="264" r="2"/><circle class="dot" cx="552" cy="264" r="2"/><circle class="dot" cx="600" cy="264" r="2"/><circle class="dot" cx="648" cy="264" r="2"/><circle class="dot" cx="696" cy="264" r="2"/><circle class="dot" cx="744" cy="264" r="2"/>
+    </g>
+    <path class="edge" d="M552 72 H648 V168 H768"/>
+    <circle class="node" cx="552" cy="72" r="6"/>
+    <circle class="node" cx="648" cy="72" r="6"/>
+    <circle class="node" cx="648" cy="168" r="6"/>
+  </svg>
+  <div class="txt">
+    <h1 class="name">PlutoSolve</h1>
+    <p class="tag">Growth Systems. Built to Perform.</p>
+  </div>
+</div>
+</body>
+</html>

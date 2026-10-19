@@ -1,0 +1,17 @@
+<svg width="960" height="288" viewBox="0 0 960 288" xmlns="http://www.w3.org/2000/svg"><style>.slab{fill:#0c0c0d}.sig{fill:#b8370b}.tint,.dot{fill:#86868a}.node{fill:#b8370b}.edge{stroke:#b8370b;stroke-width:2;fill:none}.n{font:700 72px "Helvetica Neue",Helvetica,Arial,sans-serif;letter-spacing:-2px;fill:#0c0c0d}.t{font:14px "Helvetica Neue",Helvetica,Arial,sans-serif;fill:#57575b}</style><rect width="960" height="288" fill="#f6f6f4"/>
+    <rect class="slab" x="480" y="0" width="288" height="288"/>
+    <rect class="sig" x="768" y="96" width="96" height="192"/>
+    <rect class="tint" x="864" y="0" width="96" height="96"/>
+    <g>
+      <circle class="dot" cx="504" cy="24" r="2"/><circle class="dot" cx="552" cy="24" r="2"/><circle class="dot" cx="600" cy="24" r="2"/><circle class="dot" cx="648" cy="24" r="2"/><circle class="dot" cx="696" cy="24" r="2"/><circle class="dot" cx="744" cy="24" r="2"/>
+      <circle class="dot" cx="504" cy="72" r="2"/><circle class="dot" cx="600" cy="72" r="2"/><circle class="dot" cx="696" cy="72" r="2"/><circle class="dot" cx="744" cy="72" r="2"/>
+      <circle class="dot" cx="504" cy="120" r="2"/><circle class="dot" cx="552" cy="120" r="2"/><circle class="dot" cx="600" cy="120" r="2"/><circle class="dot" cx="648" cy="120" r="2"/><circle class="dot" cx="696" cy="120" r="2"/><circle class="dot" cx="744" cy="120" r="2"/>
+      <circle class="dot" cx="504" cy="168" r="2"/><circle class="dot" cx="552" cy="168" r="2"/><circle class="dot" cx="600" cy="168" r="2"/><circle class="dot" cx="696" cy="168" r="2"/><circle class="dot" cx="744" cy="168" r="2"/>
+      <circle class="dot" cx="504" cy="216" r="2"/><circle class="dot" cx="552" cy="216" r="2"/><circle class="dot" cx="600" cy="216" r="2"/><circle class="dot" cx="648" cy="216" r="2"/><circle class="dot" cx="696" cy="216" r="2"/><circle class="dot" cx="744" cy="216" r="2"/>
+      <circle class="dot" cx="504" cy="264" r="2"/><circle class="dot" cx="552" cy="264" r="2"/><circle class="dot" cx="600" cy="264" r="2"/><circle class="dot" cx="648" cy="264" r="2"/><circle class="dot" cx="696" cy="264" r="2"/><circle class="dot" cx="744" cy="264" r="2"/>
+    </g>
+    <path class="edge" d="M552 72 H648 V168 H768"/>
+    <circle class="node" cx="552" cy="72" r="6"/>
+    <circle class="node" cx="648" cy="72" r="6"/>
+    <circle class="node" cx="648" cy="168" r="6"/>
+  <text class="n" x="48" y="186">PlutoSolve</text><text class="t" x="48" y="226">Growth Systems. Built to Perform.</text></svg>
