@@ -380,6 +380,53 @@
   .trusted { grid-template-columns: 1fr; }
 }
 
+/* ---------- Every size of project ---------- */
+.scale {
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: var(--space-12);
+  align-items: end;
+}
+.scale__body p {
+  margin: 0;
+  padding-left: var(--space-6);
+  border-left: 2px solid var(--ink);
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 700;
+}
+.scale-range {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-6);
+  margin: var(--space-16) 0;
+  padding: 0;
+  list-style: none;
+}
+.scale-range li { position: relative; padding-bottom: var(--space-4); }
+.scale-range__art { display: block; width: 100%; height: auto; }
+.scale-range__rule {
+  position: absolute;
+  left: 0;
+  right: calc(-1 * var(--space-6));
+  bottom: 0;
+  height: 1px;
+  background: var(--line-strong);
+  transform-origin: left;
+}
+.scale-range li:last-child .scale-range__rule { right: 0; }
+/* The stage rule above already closes the art, so the statement drops its own hairline. */
+.scale__closing .statement-rule { display: none; }
+.scale__closing .ps-statement { padding-top: 0; }
+@media (max-width: 900px) {
+  .scale { grid-template-columns: 1fr; gap: var(--space-8); }
+  .scale-range { grid-template-columns: repeat(3, 1fr); gap: var(--space-4); }
+  .scale-range li:nth-child(3) .scale-range__rule { right: 0; }
+  .scale-range li:last-child .scale-range__rule { right: calc(-1 * var(--space-4)); }
+  .scale-range li:last-child { grid-column: 2 / span 1; }
+  .scale-range li:nth-child(4) { grid-column: 1 / span 1; }
+}
+
 /* ---------- The Idea ---------- */
 .idea-grid {
   display: grid;

@@ -44,6 +44,15 @@ export const trusted = {
   clients: ["Amar Ujala", "Times", "News First", "Exemplar Point", "Chain & Wire"],
 };
 
+// Not in the PDF: added at the owner's request to say we take on small work too.
+export const scale = {
+  eyebrow: "Every size of project",
+  headline: ["Small projects. Large projects.", "The same care."],
+  lead: "Some of our work starts with a single landing page or one campaign. Some of it runs across an entire organisation.",
+  body: "We take on the smallest projects as readily as the largest — and give each one the same attention.",
+  closing: ["If it matters to your business,", "it matters to us."],
+};
+
 export const idea = {
   eyebrow: "The way we think",
   headline: ["Growth isn't a service.", "It's a system."],
@@ -410,6 +419,10 @@ export const audiences = {
     {
       title: "Brands Looking to Scale",
       desc: "You already have customers and want a more structured, measurable growth engine.",
+    },
+    {
+      title: "Small Businesses & First Projects",
+      desc: "You don't need a large budget or a complete brief. A single page, one campaign or one process is a good place to start.",
     },
     {
       title: "Organisations With Complex Problems",

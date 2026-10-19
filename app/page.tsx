@@ -3,12 +3,13 @@ import { Page } from "@/components/layout/page";
 import { Button, Section, SectionHeader, Statement } from "@/components/ui";
 import { CountUp, Magnetic, Reveal, SplitHeadline, Stagger, StaggerItem } from "@/components/motion/primitives";
 import { ClientStrip, Descriptor, HeroArt } from "@/components/art/misc";
+import { ScaleRange } from "@/components/art/scale-range";
 import { IdeaScene } from "@/components/art/idea-scene";
 import { CapabilityGlyph } from "@/components/art/capability-glyph";
 import { ProcessSteps } from "@/components/art/process";
 import { PrincipleScene } from "@/components/art/principle-scene";
 import { FinalCta } from "@/components/sections";
-import { approach, capabilities, capabilitiesIntro, ctas, hero, idea, nav, slug, trusted } from "@/lib/content";
+import { approach, capabilities, capabilitiesIntro, ctas, hero, idea, nav, scale, slug, trusted } from "@/lib/content";
 
 export default function Home() {
   return (
@@ -51,6 +52,17 @@ export default function Home() {
           </div>
           <ClientStrip names={trusted.clients} label="Clients" />
         </div>
+      </Section>
+
+      <Section className="border-t border-line" label={scale.eyebrow}>
+        <div className="scale">
+          <SectionHeader eyebrow={scale.eyebrow} title={scale.headline} lead={scale.lead} />
+          <Reveal delay={0.2} className="scale__body">
+            <p>{scale.body}</p>
+          </Reveal>
+        </div>
+        <ScaleRange />
+        <Statement lines={scale.closing} className="scale__closing" />
       </Section>
 
       <Section className="pb-0">
