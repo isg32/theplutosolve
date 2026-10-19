@@ -1,46 +1,35 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Page } from "@/components/layout/page";
-import { Section, SectionHeader, Statement } from "@/components/ui";
-import { Stagger, StaggerItem } from "@/components/motion/primitives";
+import { Section } from "@/components/ui";
 import { ClientStrip } from "@/components/art/misc";
-import { GrowthSystems } from "@/components/art/growth-systems";
 import { FinalCta, PageHero } from "@/components/sections";
-import { clients, industries, systems } from "@/lib/content";
+import { WorkGrid } from "@/components/work/work-grid";
+import { Testimonials } from "@/components/work/testimonials";
+import { clients } from "@/lib/content";
+import { projects, workPage } from "@/lib/work";
 
 export const metadata: Metadata = {
   title: "Our Work",
-  description: clients.lead,
+  description: `${projects.length} projects for real clients — storefronts, scholarship platforms, real-estate launches and community websites.`,
 };
 
 export default function Work() {
   return (
     <Page>
-      <PageHero eyebrow={clients.eyebrow} title={clients.headline} lead={clients.lead} />
+      <PageHero eyebrow={workPage.eyebrow} title={workPage.headline} lead={workPage.lead} />
 
-      <Section tight className="pt-0">
-        <ClientStrip names={clients.names} label={clients.eyebrow} />
+      <Section className="pt-0">
+        <WorkGrid />
       </Section>
 
-      <Section className="dotfield">
-        <SectionHeader eyebrow={systems.eyebrow} title={systems.headline} />
-        <div className="mt-12">
-          <GrowthSystems />
+      <section className="ps-section work-quotes" aria-label="Testimonials">
+        <div className="ps-container">
+          <Testimonials />
         </div>
-        <div className="mt-24">
-          <Statement lines={systems.closing} />
-        </div>
-      </Section>
+      </section>
 
-      <Section className="border-t border-line">
-        <SectionHeader eyebrow={industries.eyebrow} title={industries.headline} lead={industries.lead} />
-        <Stagger as="ul" className="work-industries" stagger={0.05}>
-          {industries.items.map((it) => (
-            <StaggerItem as="li" key={it.title}>
-              <Link href="/industries">{it.title}</Link>
-            </StaggerItem>
-          ))}
-        </Stagger>
+      <Section tight>
+        <ClientStrip eyebrow={clients.eyebrow} names={clients.names} />
       </Section>
 
       <FinalCta />

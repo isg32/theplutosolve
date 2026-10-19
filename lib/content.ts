@@ -10,7 +10,8 @@ export const brand = {
   philosophy: "Growth isn't a service. It's a system.",
   promise: "We don't just deliver services. We build systems around outcomes.",
   social: "Growth Systems. Built to Perform.",
-  email: "hello@plutosolve.com",
+  email: "rahulkushwahqueries@gmail.com",
+  phone: { display: "+91 81918 99099", href: "tel:+918191899099" },
 };
 
 export type NavItem = { label: string; href: string };
@@ -27,7 +28,7 @@ export const nav: NavItem[] = [
 export const ctas = {
   build: { label: "Build Your Growth System", href: "/contact" },
   work: { label: "Explore Our Work", href: "/work" },
-  conversation: { label: "Start a Conversation", href: `mailto:hello@plutosolve.com` },
+  conversation: { label: "Start a Conversation", href: "mailto:rahulkushwahqueries@gmail.com" },
   built: { label: "See What We've Built", href: "/work" },
 };
 
@@ -485,7 +486,8 @@ export const footer = {
       links: [
         { label: "LinkedIn", href: "https://www.linkedin.com/" },
         { label: "Instagram", href: "https://www.instagram.com/" },
-        { label: "Email", href: "mailto:hello@plutosolve.com" },
+        { label: "Email", href: "mailto:rahulkushwahqueries@gmail.com" },
+        { label: "Call +91 81918 99099", href: "tel:+918191899099" },
       ],
     },
   ],

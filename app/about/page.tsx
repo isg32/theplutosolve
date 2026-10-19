@@ -4,6 +4,7 @@ import { Button, Section, SectionHeader, Statement } from "@/components/ui";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/primitives";
 import { ClientStrip, VisionFlow } from "@/components/art/misc";
 import { Pluto } from "@/components/art/pluto";
+import { Team } from "@/components/work/team";
 import { FinalCta, PageHero } from "@/components/sections";
 import { about, clients, ctas, vision } from "@/lib/content";
 
@@ -48,6 +49,10 @@ export default function About() {
         <div className="mt-24">
           <Statement lines={about.highlight} />
         </div>
+      </Section>
+
+      <Section className="border-t border-line">
+        <Team />
       </Section>
 
       <section className="ps-section ps-inverse vision-band" aria-label={vision.eyebrow}>

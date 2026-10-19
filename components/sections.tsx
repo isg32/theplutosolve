@@ -69,9 +69,14 @@ export function FinalCta({ headingLevel = "h2" }: { headingLevel?: "h1" | "h2" }
           </Button>
         </Reveal>
         <Reveal delay={0.55}>
-          <a className="final-cta__email" href={`mailto:${brand.email}`}>
-            {brand.email}
-          </a>
+          <div className="final-cta__contact">
+            <a className="final-cta__email" href={`mailto:${brand.email}`}>
+              {brand.email}
+            </a>
+            <a className="final-cta__phone" href={brand.phone.href}>
+              {brand.phone.display}
+            </a>
+          </div>
         </Reveal>
       </div>
     </section>

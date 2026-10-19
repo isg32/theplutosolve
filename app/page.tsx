@@ -5,6 +5,8 @@ import { CountUp, Magnetic, Reveal, SplitHeadline, Stagger, StaggerItem } from "
 import { ClientStrip, Descriptor, HeroArt } from "@/components/art/misc";
 import { ScaleRange } from "@/components/art/scale-range";
 import { Pluto } from "@/components/art/pluto";
+import { WorkBand } from "@/components/work/work-band";
+import { Testimonials } from "@/components/work/testimonials";
 import { IdeaScene } from "@/components/art/idea-scene";
 import { CapabilityGlyph } from "@/components/art/capability-glyph";
 import { ProcessSteps } from "@/components/art/process";
@@ -125,7 +127,9 @@ export default function Home() {
         </ul>
       </Section>
 
-      <Section className="border-t border-line">
+      <WorkBand />
+
+      <Section>
         <SectionHeader eyebrow={approach.eyebrow} title={approach.headline} lead={approach.lead} />
         <div className="mt-16">
           <ProcessSteps />
@@ -141,6 +145,12 @@ export default function Home() {
       </Section>
 
       <PrincipleScene />
+
+      <section className="ps-section" aria-label="Testimonials">
+        <div className="ps-container">
+          <Testimonials />
+        </div>
+      </section>
 
       <FinalCta />
     </Page>
