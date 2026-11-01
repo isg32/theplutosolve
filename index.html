@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#101A3A" />
+    <meta name="theme-color" content="#15203b" />
     <title>PlutoSolve — Marketing, Technology & Creative Solutions</title>
     <meta name="description" content="PlutoSolve helps businesses grow with marketing, websites, technology, branding and business tools." />
     <meta property="og:type" content="website" />
@@ -38,11 +38,11 @@
       #site-loader.is-leaving { opacity: 0; pointer-events: none; }
       html.is-loading, html.is-loading body { overflow: hidden; overscroll-behavior: none; touch-action: none; }
       .loader-mark { height: clamp(4.5rem, 16vh, 6.5rem); width: auto; animation: loader-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
-      .loader-word { animation: loader-rise 0.9s 0.18s cubic-bezier(0.22, 1, 0.36, 1) both; margin-top: -0.6rem; font: 700 1.6rem/1 Inter, system-ui, sans-serif; letter-spacing: -0.03em; color: #101a3a; }
-      .loader-word b { font-weight: 700; background: linear-gradient(120deg, #246bfd, #7045e8); -webkit-background-clip: text; background-clip: text; color: transparent; }
-      .loader-stitch { animation: loader-rise 0.9s 0.34s ease both; width: 12rem; height: 1px; color: #246bfd; background-image: repeating-linear-gradient(90deg, currentColor 0 7px, transparent 7px 12px); opacity: 0.55; }
-      .loader-bar { width: min(14rem, 55vw); height: 2px; overflow: hidden; background: #e6eaf5; }
-      .loader-bar > span { display: block; height: 100%; background: linear-gradient(90deg, #246bfd, #7045e8); transform-origin: left; transform: scaleX(var(--p, 0.08)); transition: transform 0.12s linear; }
+      .loader-word { animation: loader-rise 0.9s 0.18s cubic-bezier(0.22, 1, 0.36, 1) both; margin-top: -0.6rem; font: 700 1.6rem/1 Inter, system-ui, sans-serif; letter-spacing: -0.03em; color: #15203b; }
+      .loader-word b { font-weight: 700; color: #3d5f9e; }
+      .loader-stitch { animation: loader-rise 0.9s 0.34s ease both; width: 12rem; height: 1px; color: #3d5f9e; background-image: repeating-linear-gradient(90deg, currentColor 0 7px, transparent 7px 12px); opacity: 0.55; }
+      .loader-bar { width: min(14rem, 55vw); height: 2px; overflow: hidden; background: #e5e8ef; }
+      .loader-bar > span { display: block; height: 100%; background: #3d5f9e; transform-origin: left; transform: scaleX(var(--p, 0.08)); transition: transform 0.12s linear; }
       #site-loader:not([data-progress]) .loader-bar > span { animation: loader-creep 5s ease-out forwards; }
       #site-loader[data-mode='nav'] .loader-bar > span { width: 40%; transform: none; animation: loader-sweep 1.1s ease-in-out infinite; }
       @keyframes loader-rise { from { opacity: 0; filter: blur(10px); } to { opacity: 1; filter: blur(0); } }

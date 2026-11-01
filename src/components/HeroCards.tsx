@@ -3,6 +3,9 @@ import { gsap, prefersReducedMotion, whenReady } from '../lib/gsap'
 
 const rand = gsap.utils.random
 
+/** Axis the 360° card spins on: 'rotationX' (forward roll), 'rotationY' (side turn) or 'rotationZ' (flat spin). */
+const SPIN_AXIS: 'rotationX' | 'rotationY' | 'rotationZ' = 'rotationX'
+
 /* ═════════════ Artwork ═════════════ */
 
 /** 360° card: an orbit ring that draws itself, with a dot that keeps circling afterwards. */
@@ -12,14 +15,14 @@ function Orbit360() {
     <svg className="o360" viewBox="0 0 64 64" aria-hidden="true">
       <defs>
         <linearGradient id={`${id}g`} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#246BFD" />
-          <stop offset="1" stopColor="#7045E8" />
+          <stop offset="0" stopColor="#3d5f9e" />
+          <stop offset="1" stopColor="#4a5f9e" />
         </linearGradient>
       </defs>
-      <circle cx="32" cy="32" r="25" fill="none" stroke="#E6EAF5" strokeWidth="2" />
+      <circle cx="32" cy="32" r="25" fill="none" stroke="#e5e8ef" strokeWidth="2" />
       <circle className="o-ring" cx="32" cy="32" r="25" fill="none" stroke={`url(#${id}g)`} strokeWidth="2.6" strokeLinecap="round" pathLength={1} strokeDasharray="1" transform="rotate(-90 32 32)" />
-      <circle cx="32" cy="32" r="15" fill="none" stroke="#E6EAF5" strokeWidth="1.2" strokeDasharray="2 4" />
-      <g className="o-dot"><circle cx="32" cy="7" r="4.2" fill={`url(#${id}g)`} /><circle cx="32" cy="7" r="7.5" fill="#246BFD" opacity="0.14" /></g>
+      <circle cx="32" cy="32" r="15" fill="none" stroke="#e5e8ef" strokeWidth="1.2" strokeDasharray="2 4" />
+      <g className="o-dot"><circle cx="32" cy="7" r="4.2" fill={`url(#${id}g)`} /><circle cx="32" cy="7" r="7.5" fill="#3d5f9e" opacity="0.14" /></g>
     </svg>
   )
 }
@@ -30,40 +33,40 @@ function Rocket() {
     <svg className="rocket" viewBox="0 0 64 64" aria-hidden="true">
       <defs>
         <linearGradient id={`${id}b`} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#3E86FF" />
-          <stop offset="1" stopColor="#6B3FE0" />
+          <stop offset="0" stopColor="#4a6aa6" />
+          <stop offset="1" stopColor="#4d4f93" />
         </linearGradient>
         <linearGradient id={`${id}f`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#FFE08A" />
-          <stop offset="0.5" stopColor="#FFA03A" />
-          <stop offset="1" stopColor="#FF5A36" />
+          <stop offset="0" stopColor="#f3d9a4" />
+          <stop offset="0.5" stopColor="#e0a164" />
+          <stop offset="1" stopColor="#d27a52" />
         </linearGradient>
         <radialGradient id={`${id}r`}>
-          <stop offset="0" stopColor="#FFB020" stopOpacity="0.85" />
-          <stop offset="1" stopColor="#FFB020" stopOpacity="0" />
+          <stop offset="0" stopColor="#e0a45a" stopOpacity="0.85" />
+          <stop offset="1" stopColor="#e0a45a" stopOpacity="0" />
         </radialGradient>
       </defs>
       {/* exhaust plume (stays behind while the rocket moves) */}
-      {Array.from({ length: 7 }, (_, i) => <circle key={i} className="rk-trail" cx="32" cy="52" r={5 + (i % 3)} fill="#DCE4FA" opacity="0" />)}
-      {Array.from({ length: 4 }, (_, i) => <circle key={i} className="rk-puff" cx="32" cy="54" r="7" fill="#E7ECFB" opacity="0" />)}
-      <circle className="rk-shock" cx="32" cy="50" r="8" fill="none" stroke="#9CB4FF" strokeWidth="1.6" opacity="0" />
-      {Array.from({ length: 10 }, (_, i) => <circle key={i} className="rk-spark" cx="32" cy="52" r="1.8" fill={i % 2 ? '#FFB020' : '#FF6B3D'} opacity="0" />)}
+      {Array.from({ length: 7 }, (_, i) => <circle key={i} className="rk-trail" cx="32" cy="52" r={5 + (i % 3)} fill="#dde1ea" opacity="0" />)}
+      {Array.from({ length: 4 }, (_, i) => <circle key={i} className="rk-puff" cx="32" cy="54" r="7" fill="#e6e9f0" opacity="0" />)}
+      <circle className="rk-shock" cx="32" cy="50" r="8" fill="none" stroke="#9fb0cf" strokeWidth="1.6" opacity="0" />
+      {Array.from({ length: 10 }, (_, i) => <circle key={i} className="rk-spark" cx="32" cy="52" r="1.8" fill={i % 2 ? '#e0a45a' : '#d27a52'} opacity="0" />)}
       <g className="rk">
         <circle className="rk-glow" cx="32" cy="54" r="16" fill={`url(#${id}r)`} opacity="0" />
         <g className="rk-flame">
           <g className="flick">
             <path d="M26 46 Q32 74 38 46 Z" fill={`url(#${id}f)`} />
-            <path d="M29 46 Q32 63 35 46 Z" fill="#FFE9A8" />
+            <path d="M29 46 Q32 63 35 46 Z" fill="#f4e3bd" />
             <path d="M30.8 46 Q32 55 33.2 46 Z" fill="#fff" />
           </g>
         </g>
-        <path d="M21 33 L11 46 L11 52 L22 46.5 Z" fill="#14204A" />
-        <path d="M43 33 L53 46 L53 52 L42 46.5 Z" fill="#14204A" />
+        <path d="M21 33 L11 46 L11 52 L22 46.5 Z" fill="#1a2544" />
+        <path d="M43 33 L53 46 L53 52 L42 46.5 Z" fill="#1a2544" />
         <path d="M32 4 C46 13 48 32 43.5 47 H20.5 C16 32 18 13 32 4 Z" fill={`url(#${id}b)`} />
         <path d="M32 4 C40 10 44 20 44 30 C40 22 37 14 32 4 Z" fill="#fff" opacity="0.22" />
-        <rect x="22" y="44" width="20" height="4.5" rx="1.5" fill="#14204A" />
-        <circle cx="32" cy="25" r="6.2" fill="#14204A" />
-        <circle cx="32" cy="25" r="4.6" fill="#BFD2FF" />
+        <rect x="22" y="44" width="20" height="4.5" rx="1.5" fill="#1a2544" />
+        <circle cx="32" cy="25" r="6.2" fill="#1a2544" />
+        <circle cx="32" cy="25" r="4.6" fill="#c4cfe6" />
         <circle cx="30.4" cy="23.4" r="1.4" fill="#fff" opacity="0.9" />
       </g>
     </svg>
@@ -81,44 +84,44 @@ function Sewing() {
     <svg className="sew" viewBox="0 0 132 60" aria-hidden="true">
       <defs>
         <pattern id={`${id}w`} width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-          <line x1="0" y1="0" x2="0" y2="5" stroke="#E1E8FA" strokeWidth="1" />
+          <line x1="0" y1="0" x2="0" y2="5" stroke="#e3e6ee" strokeWidth="1" />
         </pattern>
         <linearGradient id={`${id}c`} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#246BFD" />
-          <stop offset="1" stopColor="#7045E8" />
+          <stop offset="0" stopColor="#3d5f9e" />
+          <stop offset="1" stopColor="#4a5f9e" />
         </linearGradient>
       </defs>
       <g className="fabric">
-        <rect x="4" y="9" width="124" height="48" rx="9" fill="#F5F7FF" stroke="#DCE4FA" />
+        <rect x="4" y="9" width="124" height="48" rx="9" fill="#f5f6f9" stroke="#dde1ea" />
         <rect x="4" y="9" width="124" height="48" rx="9" fill={`url(#${id}w)`} />
       </g>
       {/* the cut: a white gap with two soft edges that opens behind the scissors, closes behind the needle */}
-      <path className="edge e1" d="M14 26.4 H118" pathLength={1} fill="none" stroke="#C9D5F2" strokeWidth="1" strokeDasharray="0 1.02 1 1" />
-      <path className="edge e2" d="M14 29.6 H118" pathLength={1} fill="none" stroke="#C9D5F2" strokeWidth="1" strokeDasharray="0 1.02 1 1" />
+      <path className="edge e1" d="M14 26.4 H118" pathLength={1} fill="none" stroke="#cdd3e0" strokeWidth="1" strokeDasharray="0 1.02 1 1" />
+      <path className="edge e2" d="M14 29.6 H118" pathLength={1} fill="none" stroke="#cdd3e0" strokeWidth="1" strokeDasharray="0 1.02 1 1" />
       <path className="gap" d="M14 28 H118" pathLength={1} fill="none" stroke="#fff" strokeWidth="3.2" strokeDasharray="0 1.02 1 1" />
       <path className="seam" d={stitchD} pathLength={1} fill="none" stroke={`url(#${id}c)`} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="1" strokeDashoffset="0" />
-      <path className="thread" d="M0 0" fill="none" stroke="#7045E8" strokeWidth="1.1" strokeLinecap="round" opacity="0" />
+      <path className="thread" d="M0 0" fill="none" stroke="#5f5a9b" strokeWidth="1.1" strokeLinecap="round" opacity="0" />
       {/* scissors: pivot (12,28); both blade groups are centred on the pivot so they rotate about it */}
       <g className="sc">
         <g className="bl-u">
           <rect x="-16" y="12" width="56" height="32" fill="none" />
-          <path d="M12 28 L41 26 L41 28.7 Z" fill="#14204A" />
-          <path d="M12 28 L6 23.5" stroke="#14204A" strokeWidth="2.2" strokeLinecap="round" />
-          <circle cx="3.2" cy="21.5" r="4.4" fill="none" stroke="#14204A" strokeWidth="2.2" />
+          <path d="M12 28 L41 26 L41 28.7 Z" fill="#1a2544" />
+          <path d="M12 28 L6 23.5" stroke="#1a2544" strokeWidth="2.2" strokeLinecap="round" />
+          <circle cx="3.2" cy="21.5" r="4.4" fill="none" stroke="#1a2544" strokeWidth="2.2" />
         </g>
         <g className="bl-l">
           <rect x="-16" y="12" width="56" height="32" fill="none" />
-          <path d="M12 28 L41 30 L41 27.3 Z" fill="#14204A" />
-          <path d="M12 28 L6 32.5" stroke="#14204A" strokeWidth="2.2" strokeLinecap="round" />
-          <circle cx="3.2" cy="34.5" r="4.4" fill="none" stroke="#14204A" strokeWidth="2.2" />
+          <path d="M12 28 L41 30 L41 27.3 Z" fill="#1a2544" />
+          <path d="M12 28 L6 32.5" stroke="#1a2544" strokeWidth="2.2" strokeLinecap="round" />
+          <circle cx="3.2" cy="34.5" r="4.4" fill="none" stroke="#1a2544" strokeWidth="2.2" />
         </g>
-        <circle cx="12" cy="28" r="2" fill="#7045E8" />
+        <circle cx="12" cy="28" r="2" fill="#5f5a9b" />
       </g>
       <g className="nd" opacity="0">
-        <path d="M0 -15 V4" stroke="#14204A" strokeWidth="2" strokeLinecap="round" />
+        <path d="M0 -15 V4" stroke="#1a2544" strokeWidth="2" strokeLinecap="round" />
         <ellipse cx="0" cy="-11" rx="0.9" ry="2" fill="#fff" />
       </g>
-      <path className="twinkle" d="M118 28 l2 -6 l2 6 l6 2 l-6 2 l-2 6 l-2 -6 l-6 -2 z" fill="#FFC83D" opacity="0" />
+      <path className="twinkle" d="M118 28 l2 -6 l2 6 l6 2 l-6 2 l-2 6 l-2 -6 l-6 -2 z" fill="#e2c479" opacity="0" />
     </svg>
   )
 }
@@ -128,17 +131,17 @@ const rainLeft = [4, 11, 17, 24, 31, 37, 44, 50, 57, 63, 70, 76, 83, 89, 95, 8, 
 function Bill({ coin }: { coin: boolean }) {
   return coin ? (
     <svg viewBox="0 0 22 22" aria-hidden="true">
-      <circle cx="11" cy="11" r="10" fill="#FFC83D" stroke="#E39A00" strokeWidth="1.4" />
-      <circle cx="11" cy="11" r="7.2" fill="none" stroke="#F4A800" strokeWidth="1" />
-      <text x="11" y="14.6" textAnchor="middle" fontSize="10" fontWeight="700" fill="#A56800">₹</text>
-      <path d="M5.5 7 A7 7 0 0 1 11 4" stroke="#FFF1B8" strokeWidth="1.4" fill="none" strokeLinecap="round" />
+      <circle cx="11" cy="11" r="10" fill="#e2c479" stroke="#bf9a4e" strokeWidth="1.4" />
+      <circle cx="11" cy="11" r="7.2" fill="none" stroke="#cfa95c" strokeWidth="1" />
+      <text x="11" y="14.6" textAnchor="middle" fontSize="10" fontWeight="700" fill="#8a6a2e">₹</text>
+      <path d="M5.5 7 A7 7 0 0 1 11 4" stroke="#f3e7c4" strokeWidth="1.4" fill="none" strokeLinecap="round" />
     </svg>
   ) : (
     <svg viewBox="0 0 30 18" aria-hidden="true">
-      <rect x="1" y="1" width="28" height="16" rx="3" fill="#8BDBAA" stroke="#3FAE78" strokeWidth="1.4" />
-      <rect x="4" y="4" width="22" height="10" rx="1.6" fill="none" stroke="#5CC48D" strokeWidth="0.9" />
-      <circle cx="15" cy="9" r="3.6" fill="#B7EBCB" stroke="#3FAE78" strokeWidth="1.2" />
-      <text x="15" y="11.1" textAnchor="middle" fontSize="5.4" fontWeight="700" fill="#2E8B5C">₹</text>
+      <rect x="1" y="1" width="28" height="16" rx="3" fill="#a9cdb7" stroke="#6aa084" strokeWidth="1.4" />
+      <rect x="4" y="4" width="22" height="10" rx="1.6" fill="none" stroke="#86b59a" strokeWidth="0.9" />
+      <circle cx="15" cy="9" r="3.6" fill="#d0e6d9" stroke="#6aa084" strokeWidth="1.2" />
+      <text x="15" y="11.1" textAnchor="middle" fontSize="5.4" fontWeight="700" fill="#4f7f65">₹</text>
     </svg>
   )
 }
@@ -146,8 +149,8 @@ function Bill({ coin }: { coin: boolean }) {
 function Trend() {
   return (
     <svg className="trend" viewBox="0 0 60 44" aria-hidden="true">
-      <path className="tr-line" d="M3 38 L17 26 L28 31 L43 13 L53 6" fill="none" stroke="#3FAE78" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" pathLength={1} strokeDasharray="1" />
-      <path className="tr-head" d="M43 5 H54 V16" fill="none" stroke="#3FAE78" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+      <path className="tr-line" d="M3 38 L17 26 L28 31 L43 13 L53 6" fill="none" stroke="#6aa084" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" pathLength={1} strokeDasharray="1" />
+      <path className="tr-head" d="M43 5 H54 V16" fill="none" stroke="#6aa084" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   )
 }
@@ -155,7 +158,7 @@ function Trend() {
 function Sparkle({ x, y, s = 1 }: { x: number; y: number; s?: number }) {
   return (
     <svg className="spk" viewBox="0 0 20 20" style={{ left: x, top: y, width: 14 * s, height: 14 * s }} aria-hidden="true">
-      <path d="M10 0 L12 8 L20 10 L12 12 L10 20 L8 12 L0 10 L8 8 Z" fill="#FFC83D" />
+      <path d="M10 0 L12 8 L20 10 L12 12 L10 20 L8 12 L0 10 L8 8 Z" fill="#e2c479" />
     </svg>
   )
 }
@@ -191,7 +194,7 @@ export default function HeroCards() {
         const cnt = $1(c1, '.cnt') as HTMLElement
         const count = { v: 0 }
         cnt.textContent = '0'
-        t1.from(c1, { opacity: 0, filter: 'blur(18px)', scale: 0.55, rotationX: 360, transformPerspective: 900, duration: 1.8, ease: 'expo.out' }, 0)
+        t1.from(c1, { opacity: 0, filter: 'blur(18px)', scale: 0.55, [SPIN_AXIS]: 360, transformPerspective: 900, duration: 1.8, ease: 'expo.out' }, 0)
           .to(count, { v: 360, duration: 1.5, ease: 'power3.out', snap: { v: 1 }, onUpdate: () => { cnt.textContent = String(count.v) } }, 0.05)
           .fromTo($1(c1, '.o-ring'), { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.5, ease: 'power2.inOut' }, 0.1)
           .from($1(c1, '.o-dot'), { opacity: 0, duration: 0.5 }, 1.1)
@@ -303,7 +306,7 @@ export default function HeroCards() {
             3.2,
           )
           .to($(c4, '.spk'), { scale: 0, opacity: 0, duration: 0.4, stagger: 0.07, ease: 'power2.in' }, 3.85)
-          .fromTo(c4, { boxShadow: '0 24px 60px -28px rgba(16,26,58,0.28)' }, { boxShadow: '0 0 0 4px rgba(92,196,141,0.28), 0 30px 60px -22px rgba(63,174,120,0.5)', duration: 0.35, yoyo: true, repeat: 1, ease: 'power2.out' }, 2.9)
+          .fromTo(c4, { boxShadow: '0 24px 60px -28px rgba(21, 32, 59,0.28)' }, { boxShadow: '0 0 0 4px rgba(106, 160, 132,0.28), 0 30px 60px -22px rgba(95, 154, 122,0.5)', duration: 0.35, yoyo: true, repeat: 1, ease: 'power2.out' }, 2.9)
         bills.forEach((b, i) => {
           const d = rand(1.1, 1.8)
           const at = 0.45 + i * 0.04 + rand(0, 0.1)
