@@ -616,3 +616,8 @@ h2 { letter-spacing: -0.025em; }
 .bg-space .shoot { filter: none; }
 .hc { box-shadow: var(--shadow-card), inset 0 1px 0 rgba(255, 255, 255, 0.9); }
 .bg-space .ring-e { transform-box: view-box; transform-origin: 88px 78px; transform: rotate(-16deg); }
+
+/* Transparent navbar over the top of the page (so the hero rings show through); frosted once scrolled or when the mobile menu is open */
+.site-header { transition: background-color 0.3s ease, backdrop-filter 0.3s ease; }
+.site-header:not(.scrolled):not(.open) { background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; }
+.site-header.open { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; }

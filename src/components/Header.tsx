@@ -19,7 +19,7 @@ export default function Header() {
   }, [])
 
   return (
-    <header className={`site-header${scrolled ? ' scrolled' : ''}`}>
+    <header className={`site-header${scrolled ? ' scrolled' : ''}${open ? ' open' : ''}`}>
       <div className="wrap nav">
         <Link className="brand" to="/" aria-label="PlutoSolve home">
           <img src={logo} width="41" height="34" alt="" />
