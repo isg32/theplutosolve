@@ -1,6 +1,6 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 import Page from '../components/Page'
-import { Clients, FinalCTA, PageHead, SectionHead } from '../components/ui'
+import { Clients, FinalCTA, MoreLink, PageHead, SectionHead } from '../components/ui'
 import { clients, filters, industries, projects, testimonial } from '../data/content'
 import { workImages } from '../data/workImages'
 import { gsap, prefersReducedMotion } from '../lib/gsap'
@@ -101,9 +101,10 @@ export default function OurWork() {
             <figcaption>
               <img src={workImages['sunitta-swaarup']} alt="" width="52" height="52" />
               <div><strong>{testimonial.name}</strong><span>{testimonial.role}</span></div>
-              <em>{testimonial.tag}</em>
+              <em>{testimonial.service}</em>
             </figcaption>
           </figure>
+          <MoreLink to="/testimonials">READ MORE CLIENT STORIES</MoreLink>
         </div>
       </section>
 

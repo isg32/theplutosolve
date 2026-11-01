@@ -431,3 +431,25 @@ a > .shot { cursor: pointer; }
 .site-header .links a.nav-cta { color: #fff; background: var(--navy); border-radius: 6px; padding: 10px 20px; font-size: 0.875rem; font-weight: 600; }
 .site-header .links a.nav-cta:hover { background: var(--navy-2); color: #fff; }
 @media (max-width: 960px) { .site-header .links a.nav-cta { padding: 14px 20px; } }
+
+/* Testimonials page */
+.qmark { width: 34px; height: 26px; fill: var(--blue); opacity: 0.9; }
+.t-av { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; flex: none; }
+.t-av.ini { display: grid; place-items: center; background: var(--grad); color: #fff; font-weight: 700; font-size: 0.95rem; }
+.tlead { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: 28px; box-shadow: var(--shadow-card); padding: 56px; max-width: 980px; }
+.tlead blockquote { margin: 22px 0 0; font-size: clamp(1.3rem, 2.8vw, 1.9rem); line-height: 1.5; font-weight: 500; letter-spacing: -0.015em; color: var(--navy); }
+.tgrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.tcard { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: 22px; padding: 36px; display: flex; flex-direction: column; gap: 18px; transition: transform 0.35s var(--ease), border-color 0.3s, box-shadow 0.3s; }
+.tcard:hover { transform: translateY(-4px); border-color: #cfd9ff; box-shadow: 0 30px 60px -28px rgba(36, 107, 253, 0.3); }
+.tcard blockquote { margin: 0; color: var(--navy); line-height: 1.65; font-size: 1rem; }
+.tlead figcaption, .tcard figcaption { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
+.tcard figcaption { margin-top: auto; padding-top: 6px; }
+.tlead figcaption div, .tcard figcaption div { display: grid; line-height: 1.35; }
+.tlead strong, .tcard strong { color: var(--navy); font-size: 0.95rem; }
+.tlead figcaption span, .tcard figcaption span { color: var(--mute); font-size: 0.82rem; }
+.tlead em, .tcard em { margin-left: auto; font-style: normal; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--violet); background: var(--soft); padding: 6px 12px; border-radius: 99px; white-space: nowrap; }
+@media (max-width: 960px) { .tlead { padding: 40px 32px; } }
+@media (max-width: 760px) { .tgrid { grid-template-columns: 1fr; } }
+@media (max-width: 600px) { .tlead { padding: 28px 22px; border-radius: 22px; } .tcard { padding: 26px 22px; } .tlead em, .tcard em { margin-left: 0; } .qmark { width: 28px; height: 21px; } }
+.tlead { max-width: none; }
+@media (min-width: 761px) { .tgrid .tcard:last-child:nth-child(odd) { grid-column: 1 / -1; } .tgrid .tcard:last-child:nth-child(odd) blockquote { max-width: 760px; } }

@@ -104,12 +104,18 @@ export const projects: Project[] = [
 
 export const filters = ['All', 'Education', 'Commerce', 'Property & stays', 'Brands & causes']
 
-export const testimonial = {
-  quote: 'Plutosolve completely transformed our online presence. Our leads tripled within 3 months and the quality of enquiries improved massively. They genuinely care about results.',
-  name: 'Sunitta Swaarup',
-  role: 'Founder, Adornn Herbal',
-  tag: 'Performance marketing',
-}
+export type Testimonial = { quote: string; name: string; role: string; service: string; photo?: string }
+
+export const testimonials: Testimonial[] = [
+  { quote: 'Plutosolve completely transformed our online presence. Our leads tripled within 3 months and the quality of enquiries improved massively. They genuinely care about results.', name: 'Sunitta Swaarup', role: 'Founder, Adornn Herbal', service: 'Performance marketing', photo: 'sunitta-swaarup' },
+  { quote: 'We hired Plutosolve to help with marketing asset generation, they communicated clearly and built quality, converting assets that worked with our existing brand. Hiring Plutosolve genuinely took work off of my plate which is more than can be said for many service providers.', name: 'Cal', role: 'Founder, CF Design', service: 'Website development', photo: 'cal' },
+  { quote: 'Our brand identity was outdated and confusing. Plutosolve rebuilt it from scratch — logo, colors, tone, everything. Now clients instantly understand what we stand for.', name: 'Arjun Mehta', role: 'Director, MindBridge EdTech', service: 'Branding & creative' },
+  { quote: 'Their consulting team helped us restructure our entire marketing funnel. We went from scattered efforts to a tight, measurable system. The clarity they brought is priceless.', name: 'Sneha Nair', role: 'COO, HealthFirst Wellness', service: 'Business consulting' },
+  { quote: 'As a startup we needed everything — social media, ads, and a website — without breaking the bank. Plutosolve delivered premium quality at a price that made sense for us.', name: 'Vikram Rao', role: 'Co-Founder, Stackly SaaS', service: 'Digital marketing' },
+  { quote: 'Working with Plutosolve feels like having an in-house team fully invested in your success. They don’t just execute — they think with you. Highly recommend.', name: 'Deepika Kapoor', role: 'MD, Kapoor & Co. Services', service: 'SEO & content' },
+]
+
+export const testimonial = testimonials[0]
 
 export const whyPoints: [string, string][] = [
   ['Marketing and technology, together.', 'Reaching customers and giving them a good digital experience are connected parts of the same business.'],
@@ -134,5 +140,6 @@ export const nav = [
   { to: '/what-we-do', label: 'What We Do' },
   { to: '/our-work', label: 'Our Work' },
   { to: '/about-us', label: 'About Us' },
+  { to: '/testimonials', label: 'Testimonials' },
   { to: '/contact', label: 'Contact' },
 ]
