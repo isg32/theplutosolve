@@ -40,7 +40,6 @@
       .loader-mark { height: clamp(4.5rem, 16vh, 6.5rem); width: auto; animation: loader-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
       .loader-word { animation: loader-rise 0.9s 0.18s cubic-bezier(0.22, 1, 0.36, 1) both; margin-top: -0.6rem; font: 700 1.6rem/1 Inter, system-ui, sans-serif; letter-spacing: -0.03em; color: #1e1b36; }
       .loader-word b { font-weight: 700; color: #6a5c9a; }
-      .loader-stitch { animation: loader-rise 0.9s 0.34s ease both; width: 12rem; height: 1px; color: #6a5c9a; background-image: repeating-linear-gradient(90deg, currentColor 0 7px, transparent 7px 12px); opacity: 0.55; }
       .loader-bar { width: min(14rem, 55vw); height: 2px; overflow: hidden; background: #e8e6ef; }
       .loader-bar > span { display: block; height: 100%; background: #6a5c9a; transform-origin: left; transform: scaleX(var(--p, 0.08)); transition: transform 0.12s linear; }
       #site-loader:not([data-progress]) .loader-bar > span { animation: loader-creep 5s ease-out forwards; }
@@ -49,14 +48,13 @@
       @keyframes loader-in { from { opacity: 0; } to { opacity: 1; } }
       @keyframes loader-creep { from { transform: scaleX(0.08); } to { transform: scaleX(0.7); } }
       @keyframes loader-sweep { from { transform: translateX(-100%); } to { transform: translateX(250%); } }
-      @media (prefers-reduced-motion: reduce) { #site-loader { transition: none; } .loader-mark, .loader-word, .loader-stitch { animation: none; } .loader-bar > span { animation: none !important; } }
+      @media (prefers-reduced-motion: reduce) { #site-loader { transition: none; } .loader-mark, .loader-word { animation: none; } .loader-bar > span { animation: none !important; } }
     </style>
   </head>
   <body>
     <div id="site-loader" role="status" aria-live="polite" aria-label="Loading PlutoSolve">
       <img class="loader-mark" src="/loader-logo.png" alt="" width="160" height="133" />
       <div class="loader-word">pluto<b>solve</b></div>
-      <div class="loader-stitch" aria-hidden="true"></div>
       <div class="loader-bar" aria-hidden="true"><span></span></div>
     </div>
     <div id="root"></div>
