@@ -465,3 +465,5 @@ a > .shot { cursor: pointer; }
 .metrics span { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mute); }
 @media (max-width: 960px) { .metrics { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 600px) { .glance { padding: 52px 0; } .glance-head { margin-bottom: 36px; text-align: left; } .metrics > div { padding: 26px 16px; } }
+
+.glance { background: var(--soft); border-block: 0; }

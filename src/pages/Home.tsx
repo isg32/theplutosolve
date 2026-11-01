@@ -39,13 +39,6 @@ export default function Home() {
 
       <Marquee items={marquee} />
 
-      <section className="pad soft">
-        <div className="wrap intro" data-reveal>
-          <h2>Different needs. One team to help you move forward.</h2>
-          <p>Some businesses need a better way to reach customers. Some need a website or a digital product. Others need a stronger brand or better tools behind the scenes. PlutoSolve works across all these areas, helping businesses turn requirements into real, useful work.</p>
-        </div>
-      </section>
-
       <section className="glance">
         <div className="wrap">
           <div className="glance-head" data-reveal>
