@@ -408,3 +408,8 @@ input.bad, select.bad, textarea.bad { border-color: #d6334c; }
   /* hero rings: top-right corner like desktop, cropped by the edge, still spinning */
   .hero .orbit { top: -170px; bottom: auto; right: -190px; width: 520px; height: 520px; opacity: 0.85; }
 }
+.plinks { margin-top: auto; padding: 10px 4px 0; display: flex; flex-wrap: wrap; gap: 6px 20px; }
+.plinks .visit { margin: 0; padding-top: 0; }
+.visit.alt { color: var(--violet); }
+.shot { display: block; }
+a > .shot { cursor: pointer; }

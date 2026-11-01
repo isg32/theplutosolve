@@ -50,21 +50,39 @@ export default function OurWork() {
             {shown.length ? (
               shown.map((p) => (
                 <article className="card case" key={p.slug}>
-                  <div className={`shot${workImages[p.slug] ? '' : ' ph'}`}>
-                    {workImages[p.slug] ? (
-                      <img src={workImages[p.slug]} alt={`${p.name} website preview`} loading="lazy" width="1200" height="750" />
+                  {(() => {
+                    const shot = (
+                      <div className={`shot${workImages[p.slug] ? '' : ' ph'}`}>
+                        {workImages[p.slug] ? (
+                          <img src={workImages[p.slug]} alt={`${p.name} website preview`} loading="lazy" width="1200" height="750" />
+                        ) : (
+                          <span aria-hidden="true">{p.name.replace(/^The /, '').split(' ').map((w) => w[0]).join('').slice(0, 3)}</span>
+                        )}
+                      </div>
+                    )
+                    return p.url ? (
+                      <a href={p.url} target="_blank" rel="noopener noreferrer" tabIndex={-1} aria-label={`Visit ${p.name}`}>{shot}</a>
                     ) : (
-                      <span aria-hidden="true">{p.name.replace(/^The /, '').split(' ').map((w) => w[0]).join('').slice(0, 3)}</span>
-                    )}
-                  </div>
+                      shot
+                    )
+                  })()}
                   <small>{p.category}</small>
                   <h3>{p.name}</h3>
                   <p>{p.text}</p>
                   <ul className="chips">{p.tags.map((t) => <li key={t}>{t}</li>)}</ul>
-                  {p.url && (
-                    <a className="visit" href={p.url} target="_blank" rel="noopener noreferrer">
-                      Visit live site <span className="arr" aria-hidden="true">↗</span>
-                    </a>
+                  {(p.url || p.links) && (
+                    <div className="plinks">
+                      {p.url && (
+                        <a className="visit" href={p.url} target="_blank" rel="noopener noreferrer">
+                          Visit live site <span className="arr" aria-hidden="true">↗</span>
+                        </a>
+                      )}
+                      {p.links?.map((l) => (
+                        <a className="visit alt" key={l.href} href={l.href} target="_blank" rel="noopener noreferrer">
+                          {l.label} <span className="arr" aria-hidden="true">↗</span>
+                        </a>
+                      ))}
+                    </div>
                   )}
                 </article>
               ))
