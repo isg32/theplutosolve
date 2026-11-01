@@ -6,6 +6,7 @@ import { gsap, ScrollTrigger, prefersReducedMotion } from '../lib/gsap'
  *  data-hero-item       entrance sequence on load (in DOM order)
  *  data-reveal          fade-up once when scrolled into view
  *  data-stagger         children fade-up in sequence when container enters view
+ *  data-count           number counts up when scrolled into view
  *  data-scene           SVG illustration drawn in on scroll (.sc-draw/.sc-pop/.sc-grow/.sc-fade)
  *  data-rule-draw       children draw their top rule (uses --p)
  * Everything is created in a gsap.context and reverted on unmount.
@@ -31,6 +32,13 @@ export function usePageMotion(scope: RefObject<HTMLElement | null>) {
       q('[data-rule-draw]').forEach((el) => {
         gsap.from(el.children, { '--p': 0, opacity: 0, filter: 'blur(10px)', stagger: 0.1, duration: 0.8, ease: 'power2.out', clearProps: 'opacity,filter', scrollTrigger: trigger(el) })
       })
+      q('[data-count]').forEach((el) => {
+        const end = Number(el.dataset.count)
+        const o = { v: 0 }
+        el.textContent = '0'
+        gsap.to(o, { v: end, duration: 1.6, ease: 'power2.out', snap: { v: 1 }, onUpdate: () => (el.textContent = String(o.v)), scrollTrigger: trigger(el) })
+      })
+
       q('[data-scene]').forEach((el) => {
         const tl = gsap.timeline({ scrollTrigger: { trigger: el, start: 'top 82%', once: true } })
         const f = (sel: string) => el.querySelectorAll(sel)
