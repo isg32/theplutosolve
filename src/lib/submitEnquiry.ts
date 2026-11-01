@@ -1,4 +1,3 @@
-import type { EnquiryFields } from './validate'
 
 const ENDPOINT = import.meta.env.VITE_ENQUIRY_ENDPOINT as string | undefined
 
@@ -7,7 +6,7 @@ const ENDPOINT = import.meta.env.VITE_ENQUIRY_ENDPOINT as string | undefined
  * `text/plain` + `no-cors` avoids a CORS preflight; the response is opaque,
  * so a resolved fetch is treated as success and only network failures reject.
  */
-export async function submitEnquiry(v: EnquiryFields): Promise<void> {
+export async function submitEnquiry(v: Record<string, unknown>): Promise<void> {
   if (!ENDPOINT) {
     if (import.meta.env.DEV) {
       await new Promise((r) => setTimeout(r, 900))

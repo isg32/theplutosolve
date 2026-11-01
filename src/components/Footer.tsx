@@ -13,6 +13,7 @@ export default function Footer() {
               <span>pluto<span className="grad">solve</span></span>
             </div>
             <p className="about">PlutoSolve helps businesses move forward with marketing, technology, branding and digital solutions.</p>
+            <p className="tagline">Ideas to Impact.</p>
           </div>
           <div>
             <h4>Navigation</h4>
