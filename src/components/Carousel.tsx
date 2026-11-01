@@ -1,4 +1,4 @@
-import { useRef, useState, type KeyboardEvent, type ReactNode } from 'react'
+import { useLayoutEffect, useRef, useState, type KeyboardEvent, type ReactNode } from 'react'
 
 export type Slide = { key: string; label: string; node: ReactNode }
 
@@ -10,8 +10,23 @@ export type Slide = { key: string; label: string; node: ReactNode }
 export default function Carousel({ slides, label }: { slides: Slide[]; label: string }) {
   const [i, setI] = useState(0)
   const touch = useRef<number | null>(null)
+  const viewport = useRef<HTMLDivElement>(null)
+  const slideEls = useRef<(HTMLDivElement | null)[]>([])
+  const [h, setH] = useState<number | undefined>(undefined)
   const n = slides.length
   const go = (k: number) => setI(((k % n) + n) % n)
+
+  // The viewport takes the height of the slide on screen, so a short slide isn't padded out to the tallest one.
+  useLayoutEffect(() => {
+    const el = slideEls.current[i]
+    if (!el) return
+    const measure = () => setH(el.offsetHeight)
+    measure()
+    if (typeof ResizeObserver === 'undefined') return
+    const ro = new ResizeObserver(measure)
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [i])
 
   const onKey = (e: KeyboardEvent) => {
     if (e.key === 'ArrowRight') {
@@ -39,11 +54,14 @@ export default function Carousel({ slides, label }: { slides: Slide[]; label: st
         if (Math.abs(dx) > 40) go(i + (dx < 0 ? 1 : -1))
       }}
     >
-      <div className="car-viewport">
+      <div className="car-viewport" ref={viewport} style={h ? { height: h } : undefined}>
         <div className="car-track" style={{ transform: `translateX(-${i * 100}%)` }}>
           {slides.map((s, k) => (
             <div
               key={s.key}
+              ref={(el) => {
+                slideEls.current[k] = el
+              }}
               className={`car-slide${k === i ? ' on' : ''}`}
               role="group"
               aria-roledescription="slide"
