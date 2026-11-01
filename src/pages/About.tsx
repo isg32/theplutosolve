@@ -1,6 +1,5 @@
 import Page from '../components/Page'
-import { FinalCTA, PageHead, SectionHead } from '../components/ui'
-import { people } from '../data/content'
+import { FinalCTA, PageHead } from '../components/ui'
 
 export default function About() {
   return (
@@ -26,24 +25,6 @@ export default function About() {
       </section>
 
       <section className="pad">
-        <div className="wrap">
-          <SectionHead eyebrow="The people" title="Different strengths. A shared way of working." />
-          <div className="people" data-stagger>
-            {people.map((p) => (
-              <div className="card person" key={p.name}>
-                <div className="av">{p.initials}</div>
-                <div>
-                  <h3>{p.name}</h3>
-                  <small>{p.role}</small>
-                  <p>{p.bio}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="pad soft">
         <div className="wrap intro" data-reveal>
           <h2>Understand first. Build what matters.</h2>
           <p>We don’t assume every business needs the same solution. We start by listening, understand the requirement and agree on what needs to be done. Then we bring the right skills together to deliver the work—with clear communication along the way.</p>

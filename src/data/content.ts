@@ -125,11 +125,6 @@ export const process: [string, string][] = [
   ['IMPROVE', 'We review what’s working and identify what can be better.'],
 ]
 
-export const people = [
-  { initials: 'RK', name: 'Rahul Kushwah', role: 'CO-FOUNDER · MARKETING & BUSINESS', bio: 'Experience in offline and digital marketing, campaign planning, brand building and business consulting. His focus is understanding what a business is trying to achieve and shaping the work needed to move it forward.' },
-  { initials: 'SK', name: 'Suraj Kushwah', role: 'CO-FOUNDER · TECHNOLOGY & DEVELOPMENT', bio: 'A technology background across full-stack development and DevOps. His focus is building digital products, platforms and tools that solve practical problems.' },
-]
-
 export const contactOptions = ['Marketing', 'Website & Technology', 'Branding & Creative', 'Business Tools & Automation', 'A combination', 'Not sure yet']
 
 export const EMAIL = 'hello@plutosolve.com'
