@@ -73,6 +73,74 @@ function Rocket() {
   )
 }
 
+/* ═════════════ Card backdrops (all 100×100, "slice" so they fill the card at any size) ═════════════ */
+
+function mulberry(seed: number) {
+  return () => {
+    seed |= 0
+    seed = (seed + 0x6d2b79f5) | 0
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed)
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296
+  }
+}
+
+/** 360° — a compass / protractor dial with degree ticks and a slow radar sweep. */
+const DIAL = { x: 80, y: 70 }
+function BgDial() {
+  return (
+    <svg className="bg-art bg-dial" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      {[16, 30, 44, 58].map((r) => <circle key={r} className="dr" cx={DIAL.x} cy={DIAL.y} r={r} fill="none" stroke="#E3DDF0" strokeWidth=".45" />)}
+      <path d={`M${DIAL.x - 70} ${DIAL.y} H${DIAL.x + 70} M${DIAL.x} ${DIAL.y - 70} V${DIAL.y + 70}`} stroke="#E8E3F2" strokeWidth=".35" strokeDasharray="1.2 1.6" className="dr" />
+      <g>
+        {Array.from({ length: 72 }, (_, i) => {
+          const major = i % 6 === 0
+          return <path key={i} className="tk" d={`M${DIAL.x} ${DIAL.y - 58} v${major ? 4.2 : 2.2}`} transform={`rotate(${i * 5} ${DIAL.x} ${DIAL.y})`} stroke={major ? '#BDB2DA' : '#D4CCE6'} strokeWidth={major ? 0.6 : 0.4} />
+        })}
+      </g>
+      <g className="sweep"><path d={`M${DIAL.x} ${DIAL.y} L${DIAL.x} ${DIAL.y - 58} A58 58 0 0 1 ${DIAL.x + 58 * Math.sin(0.6)} ${DIAL.y - 58 * Math.cos(0.6)} Z`} fill="rgba(106, 92, 154, 0.09)" /></g>
+      <circle cx={DIAL.x} cy={DIAL.y} r="1.1" fill="#BDB2DA" />
+    </svg>
+  )
+}
+
+/** Growth-First — a night sky: twinkling stars, a small planet, and speed lines for blast-off. */
+const rs = mulberry(11)
+const STARS = Array.from({ length: 46 }, () => ({ x: rs() * 100, y: 12 + rs() * 76, r: 0.28 + rs() * 0.62, o: 0.3 + rs() * 0.45, d: rs() * 3 }))
+const SPEED = Array.from({ length: 14 }, (_, i) => ({ x: 6 + i * 6.8 + rs() * 2, h: 10 + rs() * 16 }))
+function BgSpace() {
+  return (
+    <svg className="bg-art bg-space" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <path className="traj" d="M6 96 Q 34 52 70 6" fill="none" stroke="#D3CAE8" strokeWidth=".5" strokeDasharray="1.6 2.6" strokeLinecap="round" />
+      <g className="stars">
+        {STARS.map((st, i) => <circle key={i} className="star twk" cx={st.x} cy={st.y} r={st.r} fill="#8E81BA" opacity={st.o} style={{ animationDelay: `${st.d}s` }} />)}
+        {[[18, 24], [64, 20], [90, 50], [30, 78]].map(([x, y], i) => (
+          <path key={i} className="star twk" d={`M${x} ${y - 2.4} L${x + 0.7} ${y - 0.7} L${x + 2.4} ${y} L${x + 0.7} ${y + 0.7} L${x} ${y + 2.4} L${x - 0.7} ${y + 0.7} L${x - 2.4} ${y} L${x - 0.7} ${y - 0.7} Z`} fill="#A598CB" opacity=".55" style={{ animationDelay: `${i * 0.8}s` }} />
+        ))}
+      </g>
+      <g className="planet">
+        <circle cx="88" cy="78" r="11" fill="#EDE8F6" stroke="#D9D1EC" strokeWidth=".5" />
+        <path d="M80 74 Q88 70 97 75" fill="none" stroke="#D9D1EC" strokeWidth=".6" />
+        <ellipse cx="88" cy="78" rx="17" ry="4" fill="none" stroke="#CFC6E3" strokeWidth=".6" transform="rotate(-16 88 78)" />
+      </g>
+      <g>{SPEED.map((l, i) => <path key={i} className="speed" d={`M${l.x} 0 v${l.h}`} stroke="#B3A7D4" strokeWidth=".5" strokeLinecap="round" opacity="0" />)}</g>
+    </svg>
+  )
+}
+
+/** ROI — graph paper with rising bars, a trend line and a ₹ watermark. */
+const BARS = [10, 14, 12, 21, 18, 29, 27, 38, 47]
+function BgRoi() {
+  return (
+    <svg className="bg-art bg-roi" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <path className="grid" d={Array.from({ length: 11 }, (_, i) => `M${i * 10} 0 V100 M0 ${i * 10} H100`).join(' ')} stroke="#ECE8F4" strokeWidth=".3" fill="none" />
+      <text className="rupee" x="70" y="52" fontSize="46" fontWeight="700" fill="#F1EEF7">₹</text>
+      <g>{BARS.map((h, i) => <rect key={i} className="bar" x={7 + i * 9.6} y={88 - h} width="6.4" height={h + 14} rx="1.2" fill="#EBE7F4" />)}</g>
+      <path className="btrend" d="M10 78 L20 74 L30 76 L40 66 L50 68 L60 55 L70 57 L80 43 L91 33" pathLength={1} fill="none" stroke="#D2C9E6" strokeWidth=".9" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="1" />
+    </svg>
+  )
+}
+
 /* Fabric + hand-held scissors share one rotated coordinate system: the cloth is tilted 45° and
    zoomed in, and "+x" is the direction of the cut (up and to the right on screen). */
 const FRAME = 'translate(50 50) rotate(-45) scale(1.5)'
@@ -225,6 +293,10 @@ export default function HeroCards() {
           .from($1(c1, '.o-dot'), { opacity: 0, duration: 0.5 }, 1.1)
           .fromTo($1(c1, '.hc-shine'), { xPercent: -130, opacity: 1 }, { xPercent: 150, duration: 1, ease: 'power2.inOut' }, 1.35)
           .set($1(c1, '.hc-shine'), { opacity: 0 }, 2.35)
+        // backdrop: dial rings bloom, ticks sweep in around the circle, radar arm fades up
+        t1.from($(c1, '.dr'), { opacity: 0, scale: 0.6, svgOrigin: `${DIAL.x} ${DIAL.y}`, stagger: 0.1, duration: 0.9, ease: 'expo.out' }, 0.3)
+          .from($(c1, '.tk'), { opacity: 0, stagger: 0.014, duration: 0.3 }, 0.45)
+          .from($1(c1, '.sweep'), { opacity: 0, duration: 0.8 }, 1.3)
         settle(t1, c1)
 
         /* 2 ─ Rocket: ignition shake → blast off through the roof of the card with a smoke plume
@@ -255,6 +327,14 @@ export default function HeroCards() {
           .to(rk, { y: 0, duration: 0.5, ease: 'elastic.out(1, 0.5)' }, 3.27)
           .to(flame, { scaleY: 0.72, duration: 0.5, ease: 'power2.out' }, 3.2)
           .to($1(c2, '.rk-glow'), { opacity: 0.55, duration: 0.5 }, 3.2)
+        // backdrop: stars blink on, planet drifts in; on blast-off the sky streaks past and the stars shudder
+        t2.from($1(c2, '.stars'), { opacity: 0, duration: 0.9 }, 0.35)
+          .from($1(c2, '.planet'), { opacity: 0, scale: 0.7, svgOrigin: '88 78', duration: 0.9, ease: 'expo.out' }, 0.45)
+          .from($1(c2, '.traj'), { opacity: 0, duration: 0.8 }, 0.6)
+          .fromTo($(c2, '.speed'), { opacity: 0, y: -30 }, { opacity: 0.6, y: 130, duration: 0.5, stagger: 0.02, ease: 'power2.in' }, 1.6)
+          .to($(c2, '.speed'), { opacity: 0, duration: 0.2 }, 2.1)
+          .to($1(c2, '.stars'), { y: 7, duration: 0.45, ease: 'power2.in' }, 1.6)
+          .to($1(c2, '.stars'), { y: 0, duration: 0.9, ease: 'power2.out' }, 2.05)
         settle(t2, c2)
 
         /* 3 ─ Tailored: a hand slides in holding scissors and cuts straight through the cloth
@@ -316,6 +396,11 @@ export default function HeroCards() {
             .fromTo(svg, { scaleX: 1 }, { scaleX: -1, duration: rand(0.22, 0.4), repeat: Math.ceil(d / 0.3), yoyo: true, ease: 'sine.inOut', transformOrigin: '50% 50%' }, at)
         })
         t4.to($1(c4, '.hc-rain'), { opacity: 0, duration: 0.5, ease: 'power1.out' }, 2.3)
+        // backdrop: graph paper fades in; the bars grow and the trend line draws as ROI resolves
+        t4.from($1(c4, '.grid'), { opacity: 0, duration: 0.8 }, 0.3)
+          .fromTo($(c4, '.bar'), { scaleY: 0, transformOrigin: '50% 100%' }, { scaleY: 1, duration: 0.7, stagger: 0.07, ease: 'back.out(1.5)' }, 2.6)
+          .fromTo($1(c4, '.btrend'), { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.9, ease: 'power2.inOut' }, 3.0)
+          .from($1(c4, '.rupee'), { opacity: 0, duration: 0.9 }, 3.0)
         settle(t4, c4)
 
         let tiltOn = false
@@ -375,6 +460,7 @@ export default function HeroCards() {
   return (
     <div className="hcards" ref={ref}>
       <div className="hc hc1">
+        <BgDial />
         <i className="hc-shine" aria-hidden="true" />
         <div className="hc-visual">
           <span className="hc-big grad"><span className="cnt">360</span>°</span>
@@ -383,6 +469,7 @@ export default function HeroCards() {
         <div className="hc-label">Full-Service Solutions</div>
       </div>
       <div className="hc hc2">
+        <BgSpace />
         <i className="hc-shine" aria-hidden="true" />
         <div className="hc-visual"><Rocket /></div>
         <div className="hc-title">Growth-First</div>
@@ -397,6 +484,7 @@ export default function HeroCards() {
         <FabricFg />
       </div>
       <div className="hc hc4">
+        <BgRoi />
         <i className="hc-shine" aria-hidden="true" />
         <div className="hc-rain" aria-hidden="true">
           {rainLeft.map((l, i) => (
