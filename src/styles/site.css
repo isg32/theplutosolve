@@ -467,3 +467,17 @@ a > .shot { cursor: pointer; }
 @media (max-width: 600px) { .glance { padding: 52px 0; } .glance-head { margin-bottom: 36px; text-align: left; } .metrics > div { padding: 26px 16px; } }
 
 .glance { background: var(--soft); border-block: 0; }
+
+/* Seamless navbar: no bottom rule or shadow */
+.site-header, .site-header.scrolled { border-bottom: 0; box-shadow: none; }
+
+/* Floating navbar: content (and the rings) run behind the blurred bar */
+.site-header { position: fixed; top: 0; left: 0; right: 0; }
+.hero { padding-top: calc(88px + var(--nav-h)); }
+.pagehead { padding-top: calc(88px + var(--nav-h)); }
+.nf { padding-top: calc(120px + var(--nav-h)); }
+@media (max-width: 600px) {
+  .hero { padding-top: calc(40px + var(--nav-h)); }
+  .pagehead { padding-top: calc(44px + var(--nav-h)); }
+  .nf { padding-top: calc(80px + var(--nav-h)); }
+}

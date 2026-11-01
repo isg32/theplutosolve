@@ -133,7 +133,7 @@ export const process: [string, string][] = [
 
 export const contactOptions = ['Marketing', 'Website & Technology', 'Branding & Creative', 'Business Tools & Automation', 'A combination', 'Not sure yet']
 
-export const EMAIL = 'hello@plutosolve.com'
+export const EMAIL = 'contact@plutosolve.com'
 
 export const nav = [
   { to: '/', label: 'Home' },

@@ -21,7 +21,7 @@ npm run preview
 ## Contact form → Google Apps Script
 1. Create a Google Sheet, open **Extensions → Apps Script**, and paste:
 ```js
-const TEAM_EMAIL = 'hello@plutosolve.com';
+const TEAM_EMAIL = 'contact@plutosolve.com';
 function doPost(e) {
   const d = JSON.parse(e.postData.contents);
   SpreadsheetApp.getActiveSheet().appendRow([new Date(), d.n, d.e, d.c, d.s, d.m, d.page]);
