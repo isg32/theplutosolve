@@ -15,14 +15,14 @@ function Orbit360() {
     <svg className="o360" viewBox="0 0 64 64" aria-hidden="true">
       <defs>
         <linearGradient id={`${id}g`} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#3d5f9e" />
-          <stop offset="1" stopColor="#4a5f9e" />
+          <stop offset="0" stopColor="#6a5c9a" />
+          <stop offset="1" stopColor="#7a66a8" />
         </linearGradient>
       </defs>
-      <circle cx="32" cy="32" r="25" fill="none" stroke="#e5e8ef" strokeWidth="2" />
+      <circle cx="32" cy="32" r="25" fill="none" stroke="#e8e6ef" strokeWidth="2" />
       <circle className="o-ring" cx="32" cy="32" r="25" fill="none" stroke={`url(#${id}g)`} strokeWidth="2.6" strokeLinecap="round" pathLength={1} strokeDasharray="1" transform="rotate(-90 32 32)" />
-      <circle cx="32" cy="32" r="15" fill="none" stroke="#e5e8ef" strokeWidth="1.2" strokeDasharray="2 4" />
-      <g className="o-dot"><circle cx="32" cy="7" r="4.2" fill={`url(#${id}g)`} /><circle cx="32" cy="7" r="7.5" fill="#3d5f9e" opacity="0.14" /></g>
+      <circle cx="32" cy="32" r="15" fill="none" stroke="#e8e6ef" strokeWidth="1.2" strokeDasharray="2 4" />
+      <g className="o-dot"><circle cx="32" cy="7" r="4.2" fill={`url(#${id}g)`} /><circle cx="32" cy="7" r="7.5" fill="#6a5c9a" opacity="0.14" /></g>
     </svg>
   )
 }
@@ -33,8 +33,8 @@ function Rocket() {
     <svg className="rocket" viewBox="0 0 64 64" aria-hidden="true">
       <defs>
         <linearGradient id={`${id}b`} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#4a6aa6" />
-          <stop offset="1" stopColor="#4d4f93" />
+          <stop offset="0" stopColor="#7a64ad" />
+          <stop offset="1" stopColor="#5e4d93" />
         </linearGradient>
         <linearGradient id={`${id}f`} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stopColor="#f3d9a4" />
@@ -47,9 +47,9 @@ function Rocket() {
         </radialGradient>
       </defs>
       {/* exhaust plume (stays behind while the rocket moves) */}
-      {Array.from({ length: 7 }, (_, i) => <circle key={i} className="rk-trail" cx="32" cy="52" r={5 + (i % 3)} fill="#dde1ea" opacity="0" />)}
-      {Array.from({ length: 4 }, (_, i) => <circle key={i} className="rk-puff" cx="32" cy="54" r="7" fill="#e6e9f0" opacity="0" />)}
-      <circle className="rk-shock" cx="32" cy="50" r="8" fill="none" stroke="#9fb0cf" strokeWidth="1.6" opacity="0" />
+      {Array.from({ length: 7 }, (_, i) => <circle key={i} className="rk-trail" cx="32" cy="52" r={5 + (i % 3)} fill="#e0dcea" opacity="0" />)}
+      {Array.from({ length: 4 }, (_, i) => <circle key={i} className="rk-puff" cx="32" cy="54" r="7" fill="#e8e5ef" opacity="0" />)}
+      <circle className="rk-shock" cx="32" cy="50" r="8" fill="none" stroke="#b0a6cc" strokeWidth="1.6" opacity="0" />
       {Array.from({ length: 10 }, (_, i) => <circle key={i} className="rk-spark" cx="32" cy="52" r="1.8" fill={i % 2 ? '#e0a45a' : '#d27a52'} opacity="0" />)}
       <g className="rk">
         <circle className="rk-glow" cx="32" cy="54" r="16" fill={`url(#${id}r)`} opacity="0" />
@@ -60,68 +60,93 @@ function Rocket() {
             <path d="M30.8 46 Q32 55 33.2 46 Z" fill="#fff" />
           </g>
         </g>
-        <path d="M21 33 L11 46 L11 52 L22 46.5 Z" fill="#1a2544" />
-        <path d="M43 33 L53 46 L53 52 L42 46.5 Z" fill="#1a2544" />
+        <path d="M21 33 L11 46 L11 52 L22 46.5 Z" fill="#25203f" />
+        <path d="M43 33 L53 46 L53 52 L42 46.5 Z" fill="#25203f" />
         <path d="M32 4 C46 13 48 32 43.5 47 H20.5 C16 32 18 13 32 4 Z" fill={`url(#${id}b)`} />
         <path d="M32 4 C40 10 44 20 44 30 C40 22 37 14 32 4 Z" fill="#fff" opacity="0.22" />
-        <rect x="22" y="44" width="20" height="4.5" rx="1.5" fill="#1a2544" />
-        <circle cx="32" cy="25" r="6.2" fill="#1a2544" />
-        <circle cx="32" cy="25" r="4.6" fill="#c4cfe6" />
+        <rect x="22" y="44" width="20" height="4.5" rx="1.5" fill="#25203f" />
+        <circle cx="32" cy="25" r="6.2" fill="#25203f" />
+        <circle cx="32" cy="25" r="4.6" fill="#cfc7e3" />
         <circle cx="30.4" cy="23.4" r="1.4" fill="#fff" opacity="0.9" />
       </g>
     </svg>
   )
 }
 
-/* Seam stitch path: a zig-zag that crosses the cut. */
-const STITCH_N = 14
-const stitchPts: [number, number][] = Array.from({ length: STITCH_N }, (_, k) => [14 + k * 7.6, k % 2 ? 36 : 20])
-const stitchD = 'M' + stitchPts.map((p) => p.join(' ')).join(' L')
+/* Fabric + hand-held scissors share one rotated coordinate system: the cloth is tilted 45° and
+   zoomed in, and "+x" is the direction of the cut (up and to the right on screen). */
+const FRAME = 'translate(50 50) rotate(-45) scale(1.5)'
 
-function Sewing() {
+function FabricBg() {
   const id = useId().replace(/:/g, '')
   return (
-    <svg className="sew" viewBox="0 0 132 60" aria-hidden="true">
+    <svg className="fab-bg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
       <defs>
-        <pattern id={`${id}w`} width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-          <line x1="0" y1="0" x2="0" y2="5" stroke="#e3e6ee" strokeWidth="1" />
+        <pattern id={`${id}w`} width="3" height="3" patternUnits="userSpaceOnUse">
+          <rect width="3" height="3" fill="#f5f3f9" />
+          <path d="M0 .25 H3 M.25 0 V3" stroke="#e9e6f0" strokeWidth=".5" />
         </pattern>
-        <linearGradient id={`${id}c`} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#3d5f9e" />
-          <stop offset="1" stopColor="#4a5f9e" />
-        </linearGradient>
+        <pattern id={`${id}t`} width="12" height="12" patternUnits="userSpaceOnUse">
+          <path d="M0 6 H12 M6 0 V12" stroke="#e1ddea" strokeWidth=".35" />
+        </pattern>
       </defs>
-      <g className="fabric">
-        <rect x="4" y="9" width="124" height="48" rx="9" fill="#f5f6f9" stroke="#dde1ea" />
-        <rect x="4" y="9" width="124" height="48" rx="9" fill={`url(#${id}w)`} />
-      </g>
-      {/* the cut: a white gap with two soft edges that opens behind the scissors, closes behind the needle */}
-      <path className="edge e1" d="M14 26.4 H118" pathLength={1} fill="none" stroke="#cdd3e0" strokeWidth="1" strokeDasharray="0 1.02 1 1" />
-      <path className="edge e2" d="M14 29.6 H118" pathLength={1} fill="none" stroke="#cdd3e0" strokeWidth="1" strokeDasharray="0 1.02 1 1" />
-      <path className="gap" d="M14 28 H118" pathLength={1} fill="none" stroke="#fff" strokeWidth="3.2" strokeDasharray="0 1.02 1 1" />
-      <path className="seam" d={stitchD} pathLength={1} fill="none" stroke={`url(#${id}c)`} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="1" strokeDashoffset="0" />
-      <path className="thread" d="M0 0" fill="none" stroke="#5f5a9b" strokeWidth="1.1" strokeLinecap="round" opacity="0" />
-      {/* scissors: pivot (12,28); both blade groups are centred on the pivot so they rotate about it */}
-      <g className="sc">
-        <g className="bl-u">
-          <rect x="-16" y="12" width="56" height="32" fill="none" />
-          <path d="M12 28 L41 26 L41 28.7 Z" fill="#1a2544" />
-          <path d="M12 28 L6 23.5" stroke="#1a2544" strokeWidth="2.2" strokeLinecap="round" />
-          <circle cx="3.2" cy="21.5" r="4.4" fill="none" stroke="#1a2544" strokeWidth="2.2" />
+      <g transform={FRAME}>
+        <g className="zoom">
+          <g className="half-t">
+            <rect x="-160" y="-160" width="320" height="160" fill={`url(#${id}w)`} />
+            <rect x="-160" y="-160" width="320" height="160" fill={`url(#${id}t)`} />
+          </g>
+          <g className="half-b">
+            <rect x="-160" y="0" width="320" height="160" fill={`url(#${id}w)`} />
+            <rect x="-160" y="0" width="320" height="160" fill={`url(#${id}t)`} />
+          </g>
+          <path className="gap" d="M-58 0 H58" pathLength={1} fill="none" stroke="#fff" strokeWidth="2.4" strokeDasharray="0 1.02 1 1" />
         </g>
-        <g className="bl-l">
-          <rect x="-16" y="12" width="56" height="32" fill="none" />
-          <path d="M12 28 L41 30 L41 27.3 Z" fill="#1a2544" />
-          <path d="M12 28 L6 32.5" stroke="#1a2544" strokeWidth="2.2" strokeLinecap="round" />
-          <circle cx="3.2" cy="34.5" r="4.4" fill="none" stroke="#1a2544" strokeWidth="2.2" />
+      </g>
+    </svg>
+  )
+}
+
+const SKIN = '#E2B9A0'
+const SKIN_EDGE = '#C99A7E'
+const STEEL = '#c3bdd6'
+const INK = '#25203f'
+
+function Blade({ dir }: { dir: 1 | -1 }) {
+  // dir -1 = upper blade (thumb), +1 = lower blade (fingers). Pivot is the origin.
+  const y = (v: number) => v * dir
+  return (
+    <>
+      <rect x="-30" y="-14" width="60" height="28" fill="none" />
+      {/* thumb / fingers pass through the ring, rotating with the handle */}
+      <path d={`M-25 ${y(3)} L-9 ${y(5.8)}`} stroke={SKIN_EDGE} strokeWidth="4.6" strokeLinecap="round" fill="none" />
+      <path d={`M-25 ${y(3)} L-9 ${y(5.8)}`} stroke={SKIN} strokeWidth="3.5" strokeLinecap="round" fill="none" />
+      <path d={`M0 0 L25 ${y(1.7)} L25 ${y(-0.9)} Z`} fill={STEEL} stroke={INK} strokeWidth=".5" strokeLinejoin="round" />
+      <path d={`M2 ${y(0.4)} L23 ${y(1.1)}`} stroke="#fff" strokeWidth=".6" opacity=".7" strokeLinecap="round" />
+      <path d={`M0 0 L-5.2 ${y(3.8)}`} stroke={INK} strokeWidth="1.6" strokeLinecap="round" />
+      <circle cx="-8.6" cy={y(6)} r="3.5" fill="none" stroke={INK} strokeWidth="1.5" />
+    </>
+  )
+}
+
+function FabricFg() {
+  return (
+    <svg className="fab-fg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <g transform={FRAME}>
+        <g className="zoom">
+          <g className="sc">
+            {/* sleeve, cuff and hand (drawn at full size, scaled down to sit right on the card) */}
+            <g transform="scale(0.62)">
+            <path d="M-175 -6.5 H-35 Q-32.5 0 -35 6.5 H-175 Z" fill="#3b3358" />
+            <rect x="-41" y="-7.4" width="6.4" height="14.8" rx="2" fill="#4d4470" />
+            <path d="M-36 -6.4 C-34 -9.4 -26 -9.4 -22.5 -7 L-19.5 -3.8 L-19.5 3.8 L-22.5 7 C-26 9.4 -34 9.4 -36 6.4 Z" fill={SKIN} stroke={SKIN_EDGE} strokeWidth=".5" />
+            <g className="bl-u"><Blade dir={-1} /></g>
+            <g className="bl-l"><Blade dir={1} /></g>
+            <circle cx="0" cy="0" r="1.5" fill={INK} />
+            </g>
+          </g>
         </g>
-        <circle cx="12" cy="28" r="2" fill="#5f5a9b" />
       </g>
-      <g className="nd" opacity="0">
-        <path d="M0 -15 V4" stroke="#1a2544" strokeWidth="2" strokeLinecap="round" />
-        <ellipse cx="0" cy="-11" rx="0.9" ry="2" fill="#fff" />
-      </g>
-      <path className="twinkle" d="M118 28 l2 -6 l2 6 l6 2 l-6 2 l-2 6 l-2 -6 l-6 -2 z" fill="#e2c479" opacity="0" />
     </svg>
   )
 }
@@ -232,60 +257,33 @@ export default function HeroCards() {
           .to($1(c2, '.rk-glow'), { opacity: 0.55, duration: 0.5 }, 3.2)
         settle(t2, c2)
 
-        /* 3 ─ Tailored: scissors cut the cloth (the gap opens behind them), then a needle sews
-               the seam shut in a zig-zag, the thread trailing behind, the gap closing as it goes. */
+        /* 3 ─ Tailored: a hand slides in holding scissors and cuts straight through the cloth
+               (tilted 45° and zoomed in behind the card). The slit opens behind the blades and
+               the two halves ease apart. No stitching. */
         const t3 = gsap.timeline()
+        const sc = $1(c3, '.sc')
         const gap = $1(c3, '.gap') as SVGPathElement
-        const edges = $(c3, '.edge') as SVGPathElement[]
-        const seam = $1(c3, '.seam') as SVGPathElement
-        const thread = $1(c3, '.thread') as SVGPathElement
-        const nd = $1(c3, '.nd')
-        const ndPos = { x: 14, y: 20 }
+        const zooms = $(c3, '.zoom')
+        const halfT = $1(c3, '.half-t')
+        const halfB = $1(c3, '.half-b')
+        const bu = $1(c3, '.bl-u')
+        const bl = $1(c3, '.bl-l')
         enter(t3, c3)
-        gsap.set([gap, ...edges], { strokeDasharray: '1', strokeDashoffset: 1 })
-        gsap.set(seam, { strokeDashoffset: 1 })
-        t3.fromTo($1(c3, '.sc'), { opacity: 0, scale: 0.7, transformOrigin: '12px 28px' }, { opacity: 1, scale: 1, duration: 0.35, ease: 'back.out(2)' }, 0.55)
-          .set($1(c3, '.bl-u'), { rotation: -15, transformOrigin: '50% 50%' }, 0.55)
-          .set($1(c3, '.bl-l'), { rotation: 15, transformOrigin: '50% 50%' }, 0.55)
-          // snip-snip-snip while travelling along the cloth
-          .to([$1(c3, '.bl-u'), $1(c3, '.bl-l')], { rotation: 0, duration: 0.09, repeat: 9, yoyo: true, ease: 'power1.inOut' }, 0.85)
-          .to($1(c3, '.sc'), { x: 94, duration: 0.9, ease: 'power1.inOut' }, 0.85)
-          .to([gap, ...edges], { strokeDashoffset: 0, duration: 0.9, ease: 'power1.inOut' }, 0.85)
-          .to($1(c3, '.sc'), { opacity: 0, x: 108, rotation: 8, transformOrigin: '12px 28px', duration: 0.28, ease: 'power2.in' }, 1.85)
-          // needle enters and sews the seam
-          .fromTo(nd, { opacity: 0, x: 8, y: 20 }, { opacity: 1, x: 14, y: 20, duration: 0.3, ease: 'power2.out' }, 1.95)
-        const sew = { p: 0 }
-        t3.to(sew, {
-          p: 1,
-          duration: 1.4,
-          ease: 'none',
-          onUpdate() {
-            const f = sew.p * (STITCH_N - 1)
-            const i = Math.min(STITCH_N - 2, Math.floor(f))
-            const u = f - i
-            const [x0, y0] = stitchPts[i]
-            const [x1, y1] = stitchPts[i + 1]
-            ndPos.x = x0 + (x1 - x0) * u
-            ndPos.y = y0 + (y1 - y0) * u
-            gsap.set(nd, { x: ndPos.x, y: ndPos.y })
-            seam.style.strokeDashoffset = String(1 - sew.p)
-            // the gap closes behind the needle
-            const keep = `0 ${Math.min(1, sew.p + 0.02)} 1 1`
-            gap.style.strokeDasharray = keep
-            edges.forEach((e) => (e.style.strokeDasharray = keep))
-            // thread: slack curve from the needle's eye back to where the stitching began
-            const sx = ndPos.x
-            const sy = ndPos.y - 11
-            const sag = 5 + Math.sin(sew.p * 40) * 3
-            thread.setAttribute('d', `M ${Math.max(6, sx - 22)} ${sy - 12 + sag} Q ${sx - 10} ${sy + sag} ${sx} ${sy}`)
-          },
-        }, 2.15)
-          .to(thread, { opacity: 1, duration: 0.25 }, 2.15)
-          .to(thread, { opacity: 0, duration: 0.3 }, 3.5)
-          .to(nd, { opacity: 0, x: '+=14', y: '-=10', duration: 0.35, ease: 'power2.in' }, 3.55)
-          .fromTo($1(c3, '.twinkle'), { opacity: 1, scale: 0, rotation: -40, transformOrigin: '50% 50%' }, { scale: 1, rotation: 0, duration: 0.4, ease: 'back.out(2.4)' }, 3.55)
-          .to($1(c3, '.twinkle'), { opacity: 0, scale: 0.4, duration: 0.45, ease: 'power2.in' }, 4.0)
-          .fromTo($1(c3, '.fabric'), { scale: 1.025, transformOrigin: '50% 50%' }, { scale: 1, duration: 0.6, ease: 'elastic.out(1, 0.5)' }, 3.55)
+        gsap.set(gap, { strokeDasharray: '1', strokeDashoffset: 1 })
+        gsap.set([halfT, halfB], { y: 0 })
+        gsap.set(sc, { opacity: 1, x: -92 })
+        gsap.set(bu, { rotation: -13, transformOrigin: '50% 50%' })
+        gsap.set(bl, { rotation: 13, transformOrigin: '50% 50%' })
+        t3.fromTo(zooms, { scale: 1, svgOrigin: '0 0' }, { scale: 1.1, svgOrigin: '0 0', duration: 3.4, ease: 'power1.inOut' }, 0.2)
+          .to(sc, { x: -52, duration: 0.55, ease: 'power2.out' }, 0.6)
+          // snip-snip while travelling through the cloth
+          .to([bu, bl], { rotation: 0, duration: 0.11, repeat: 11, yoyo: true, ease: 'power1.inOut' }, 1.0)
+          .to(sc, { x: 52, duration: 1.35, ease: 'power1.inOut' }, 1.1)
+          .fromTo(gap, { strokeDashoffset: 0.92 }, { strokeDashoffset: 0, duration: 1.35, ease: 'power1.inOut' }, 1.1)
+          // scissors leave; the cut halves ease apart
+          .to(sc, { x: 240, duration: 0.75, ease: 'power2.in' }, 2.5)
+          .to(halfT, { y: -2.6, duration: 0.8, ease: 'back.out(2)' }, 2.45)
+          .to(halfB, { y: 2.6, duration: 0.8, ease: 'back.out(2)' }, 2.45)
         settle(t3, c3)
 
         /* 4 ─ ROI: a proper money rain (tumbling, flipping, swaying notes and coins), which fades
@@ -307,7 +305,7 @@ export default function HeroCards() {
             3.5,
           )
           .to($(c4, '.spk'), { scale: 0, opacity: 0, duration: 0.4, stagger: 0.07, ease: 'power2.in' }, 4.15)
-          .fromTo(c4, { boxShadow: '0 24px 60px -28px rgba(21, 32, 59,0.28)' }, { boxShadow: '0 0 0 4px rgba(106, 160, 132,0.28), 0 30px 60px -22px rgba(95, 154, 122,0.5)', duration: 0.35, yoyo: true, repeat: 1, ease: 'power2.out' }, 3.2)
+          .fromTo(c4, { boxShadow: '0 24px 60px -28px rgba(30, 27, 54,0.28)' }, { boxShadow: '0 0 0 4px rgba(106, 160, 132,0.28), 0 30px 60px -22px rgba(95, 154, 122,0.5)', duration: 0.35, yoyo: true, repeat: 1, ease: 'power2.out' }, 3.2)
         bills.forEach((b, i) => {
           const d = rand(1.1, 1.8)
           const at = 0.45 + i * 0.04 + rand(0, 0.1)
@@ -391,10 +389,12 @@ export default function HeroCards() {
         <div className="hc-label">Strategy &amp; Execution</div>
       </div>
       <div className="hc hc3">
+        <FabricBg />
         <i className="hc-shine" aria-hidden="true" />
-        <div className="hc-visual"><Sewing /></div>
+        <div className="hc-visual" />
         <div className="hc-title">Tailored</div>
         <div className="hc-label">No cookie-cutter plans</div>
+        <FabricFg />
       </div>
       <div className="hc hc4">
         <i className="hc-shine" aria-hidden="true" />
