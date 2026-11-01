@@ -1,6 +1,6 @@
 import { useRef, type ReactNode } from 'react'
 import Carousel, { type Slide } from '../components/Carousel'
-import { Frame, MockBrand, MockDashboard, MockFunnel, MockPipeline, MockReport, MockRoles } from '../components/Mocks'
+import { Frame } from '../components/Frame'
 import Page from '../components/Page'
 import PortfolioForm from '../components/PortfolioForm'
 import { Clients, Tags } from '../components/ui'
@@ -8,64 +8,57 @@ import { clients, industries, projects, testimonials } from '../data/content'
 import { client, creative, hero, industry, marketing, request, SEO, systems, testimonialsCopy, websites, type Capability } from '../data/ourWork'
 import { workImages } from '../data/workImages'
 
-/* ───────── slide builders ───────── */
+/* ───────── slide builders (all screenshots are real captures of live pages or real work) ───────── */
 
 const bySlug = (slug: string) => projects.find((p) => p.slug === slug)!
 
-/** A real project screenshot in a frame, with a caption and a link to the live site where there is one. */
-function Shot({ slug, alt, tall = false }: { slug: string; alt: string; tall?: boolean }) {
-  const p = bySlug(slug)
-  const link = p.url ?? p.links?.[0]?.href
-  const linkLabel = p.url ? 'Visit live site' : p.links?.[0]?.label
+type Real = { img: string; title: string; sub: string; alt: string; href?: string; cta?: string; bare?: boolean; tall?: boolean }
+
+function RealShot({ img, title, sub, alt, href, cta = 'Visit live page', bare, tall }: Real) {
   return (
     <figure className="car-fig">
-      <Frame className={tall ? 'tall' : ''}>
-        <img src={workImages[slug]} alt={alt} loading="lazy" width="1200" height="750" />
+      <Frame bare={bare} className={tall ? 'tall' : ''}>
+        <img src={workImages[img]} alt={alt} loading="lazy" width="1200" height="750" />
       </Frame>
       <figcaption>
-        <strong>{p.name}</strong>
-        <span>{p.tags.join(' · ')}</span>
-        {link && <a href={link} target="_blank" rel="noopener noreferrer">{linkLabel} <span aria-hidden="true">↗</span></a>}
+        <strong>{title}</strong>
+        <span>{sub}</span>
+        {href && <a href={href} target="_blank" rel="noopener noreferrer">{cta} <span aria-hidden="true">↗</span></a>}
       </figcaption>
     </figure>
   )
 }
 
-function Illustrative({ children, title }: { children: ReactNode; title: string }) {
-  return (
-    <figure className="car-fig">
-      {children}
-      <figcaption>
-        <strong>{title}</strong>
-        <span className="illus">Illustrative screen. Not a client screenshot.</span>
-      </figcaption>
-    </figure>
-  )
-}
+const slide = (key: string, r: Real): Slide => ({ key, label: r.title, node: <RealShot {...r} /> })
 
 const websiteSlugs = ['amar-ujala-disha', 'hemm', 'nava-dishe', 'prima', 'sumaani', 'shia-bazaar', 'chains-and-spares', 'cf-design']
-const websiteSlides: Slide[] = websiteSlugs.map((s) => ({
-  key: s,
-  label: bySlug(s).name,
-  node: <Shot slug={s} alt={`${bySlug(s).name}: ${bySlug(s).tags[0].toLowerCase()} by PlutoSolve`} />,
-}))
+const websiteSlides: Slide[] = websiteSlugs.map((s) => {
+  const p = bySlug(s)
+  return slide(s, { img: s, title: p.name, sub: p.tags.join(' · '), alt: `${p.name}: ${p.tags[0].toLowerCase()} by PlutoSolve`, href: p.url, cta: 'Visit live site' })
+})
 
+// Systems: real pages from live builds that show the functionality behind them
 const systemSlides: Slide[] = [
-  { key: 'dash', label: 'Management dashboard', node: <Illustrative title="Management dashboard"><MockDashboard /></Illustrative> },
-  { key: 'crm', label: 'CRM and lead pipeline', node: <Illustrative title="CRM and lead management"><MockPipeline /></Illustrative> },
-  { key: 'roles', label: 'Roles and permissions', node: <Illustrative title="User roles and permissions"><MockRoles /></Illustrative> },
+  slide('disha-results', { img: 'disha-results', title: 'DISHA: check your results', sub: "Results lookup for Amar Ujala's scholarship exam", alt: 'DISHA scholarship results lookup page', href: 'https://disha.amarujaladigital.com/results.html' }),
+  slide('chains-quote', { img: 'chains-quote', title: 'Chains & Spares: home with quote form', sub: 'Lead capture with a built-in quote request', alt: 'Chains & Spares home page with quote request form', href: 'https://www.chainsandspares.com/' }),
+  slide('chains-products', { img: 'chains-products', title: 'Chains & Spares: all products', sub: 'A structured product catalogue', alt: 'Chains & Spares structured product catalogue page', href: 'https://www.chainsandspares.com/products' }),
+  slide('shia-books', { img: 'shia-books', title: 'Shia Bazaar: Islamic books', sub: 'Catalogue of 1,300+ items in Urdu, Hindi, Bengali and Arabic', alt: 'Shia Bazaar online store category page for Islamic books', href: 'https://shiabazaar.vercel.app/category/books' }),
+  slide('educators-join', { img: 'educators-join', title: 'Educators Federation: join the federation', sub: 'A membership journey for educators and institutions', alt: 'Educators Federation membership sign-up page', href: 'https://educatorsfederation.vercel.app/join' }),
 ]
 
+// Marketing: real social, reporting and campaign-site work
 const marketingSlides: Slide[] = [
-  { key: 'social', label: 'Social creative for Adornn Herbal', node: <Shot slug="adornn-herbal" alt="Instagram creative for Adornn Herbal, part of a social media and performance marketing engagement" tall /> },
-  { key: 'report', label: 'Campaign report', node: <Illustrative title="Campaign reporting with baseline, period and source"><MockReport /></Illustrative> },
-  { key: 'funnel', label: 'Marketing funnel', node: <Illustrative title="From awareness to customer"><MockFunnel /></Illustrative> },
+  slide('adornn-post', { img: 'adornn-herbal', title: 'Adornn Herbal: Instagram post', sub: 'Social media management and performance marketing', alt: 'Instagram post designed for Adornn Herbal hair-care range', href: 'https://www.instagram.com/adornnherbal/', cta: 'View on Instagram', bare: true, tall: true }),
+  slide('adelphia-insights', { img: 'adelphia-insights', title: 'Adelphia Girls Hostel: Instagram insights', sub: 'Last 30 days, Jan 17 – Feb 15. Source: Instagram Insights', alt: 'Instagram Insights views report for Adelphia Girls Hostel covering a 30-day period', bare: true, tall: true }),
+  slide('adelphia-site', { img: 'adelphia-site', title: 'Adelphia Girls Hostel: website', sub: 'Website, Instagram management and Meta Ads for lead generation', alt: 'Adelphia Girls Hostel website supporting Meta Ads lead generation', href: 'https://www.adelphiagirlshostel.com/', cta: 'Visit live site' }),
 ]
 
+// Creative: real identity, packaging and print work
 const creativeSlides: Slide[] = [
-  { key: 'olympiads', label: 'National Olympiads website and registration form', node: <Shot slug="national-olympiads" alt="National Olympiads website and printed student registration form design" /> },
-  { key: 'brand', label: 'Brand identity board', node: <Illustrative title="Identity, colour and type"><MockBrand /></Illustrative> },
-  { key: 'hemm', label: 'HEMM storefront', node: <Shot slug="hemm" alt="HEMM women's clothing storefront design" /> },
+  slide('packaging', { img: 'adornn-packaging', title: 'Adornn Herbal: Herbaura hair-oil packaging', sub: 'Packaging design', alt: 'Herbaura hair oil packaging design for Adornn Herbal', bare: true }),
+  slide('brochure', { img: 'cf-brochure', title: 'CF Design: printed brochure', sub: 'Brochure design alongside the website', alt: 'Printed brochure designed for CF Design carpentry and outdoor builds', bare: true }),
+  slide('reg-form', { img: 'olympiads-form', title: 'National Olympiads: student registration form 2026–27', sub: 'Registration form design that matches the online flow', alt: 'Printed student registration form for National Olympiads 2026-27', bare: true, tall: true }),
+  slide('olympiads-site', { img: 'national-olympiads', title: 'National Olympiads: website', sub: 'Website development for the Olympiad programme by Amar Ujala', alt: 'National Olympiads by Amar Ujala website', cta: 'Visit live page' }),
 ]
 
 const quoteSlides: Slide[] = testimonials.map((t) => ({
@@ -94,12 +87,16 @@ function CapabilitySection({ cap, slides, flip = false, tone, strip }: { cap: Ca
           <h2 data-reveal>{cap.headline}</h2>
           <p className="cap-intro" data-reveal>{cap.intro}</p>
           <div className="cap-blocks" data-stagger>
-            {cap.blocks.map((b, i) => (
-              <div key={i}>
-                {b.title && <h3>{b.title}</h3>}
-                <p>{b.text}</p>
-              </div>
-            ))}
+            {cap.blocks.map((b, i) =>
+              b.title ? (
+                <details key={i} className="acc" open={i === 0 || undefined}>
+                  <summary><h3>{b.title}</h3></summary>
+                  <p>{b.text}</p>
+                </details>
+              ) : (
+                <p key={i} className="cap-p">{b.text}</p>
+              ),
+            )}
           </div>
           {cap.closing && <p className="cap-closing" data-reveal>{cap.closing}</p>}
           <div data-reveal><Tags items={cap.tags} /></div>
