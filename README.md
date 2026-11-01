@@ -1,7 +1,7 @@
 # PlutoSolve website
 
 React 19 + TypeScript + Vite, routed with `react-router`, animated with GSAP + ScrollTrigger.
-Design and copy are ported from `old/PlutoSolve Website.html`; all assets (Sora font, logo) are self-hosted.
+Design and copy are ported from `old/PlutoSolve Website.html`; all assets (Inter font, logo) are self-hosted.
 
 ## Develop
 ```bash

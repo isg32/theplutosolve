@@ -32,9 +32,9 @@ export default function Header() {
           {nav.map((n) => (
             <NavLink key={n.to} to={n.to} end className={({ isActive }) => (isActive ? 'on' : '')}>{n.label}</NavLink>
           ))}
-          <Link className="btn p mb" to="/contact">Let’s Talk <span className="arr" aria-hidden="true">→</span></Link>
+          <Link className="nav-cta mb" to="/contact">Let’s Talk</Link>
         </nav>
-        <Link className="btn p" to="/contact">Let’s Talk <span className="arr" aria-hidden="true">→</span></Link>
+        <Link className="nav-cta" to="/contact">Let’s Talk</Link>
       </div>
     </header>
   )
