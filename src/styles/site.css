@@ -29,7 +29,7 @@ body {
   overflow-x: hidden;
 }
 h1, h2, h3 { color: var(--navy); margin: 0; line-height: 1.15; letter-spacing: -0.02em; font-weight: 700; }
-h1 { font-size: clamp(2.2rem, 5.4vw, 4rem); font-weight: 800; }
+h1 { font-size: clamp(2.2rem, 5.4vw, 4rem); font-weight: 700; }
 h2 { font-size: clamp(1.7rem, 3.4vw, 2.6rem); }
 h3 { font-size: 1.15rem; letter-spacing: -0.01em; }
 p { margin: 0; }
@@ -144,7 +144,7 @@ section.pad { padding: 96px 0; }
 .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; counter-reset: s; }
 .step { position: relative; overflow: hidden; padding: 30px 24px 28px; border-radius: 20px; background: #fff; border: 1px solid var(--line); counter-increment: s; transition: transform 0.3s var(--ease), border-color 0.3s; }
 .step:hover { transform: translateY(-4px); border-color: #cfd9ff; }
-.step::before { content: '0' counter(s); display: block; font-weight: 800; font-size: 2rem; margin-bottom: 14px; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.step::before { content: '0' counter(s); display: block; font-weight: 700; font-size: 2rem; margin-bottom: 14px; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .step h3 { font-size: 0.95rem; letter-spacing: 0.1em; margin-bottom: 8px; }
 .step p { font-size: 0.9rem; color: var(--mute); }
 
@@ -219,7 +219,7 @@ input.bad, select.bad, textarea.bad { border-color: #d6334c; }
 .totop.show { opacity: 1; transform: none; pointer-events: auto; }
 .totop:hover { color: var(--blue); border-color: var(--blue); }
 .nf { padding: 120px 0 40px; text-align: center; }
-.nf .big { font-size: clamp(5rem, 16vw, 10rem); font-weight: 800; line-height: 1; letter-spacing: -0.05em; }
+.nf .big { font-size: clamp(5rem, 16vw, 10rem); font-weight: 700; line-height: 1; letter-spacing: -0.05em; }
 .nf p { margin: 20px auto 36px; max-width: 460px; color: var(--mute); }
 .nf .cta { justify-content: center; }
 
@@ -327,7 +327,7 @@ input.bad, select.bad, textarea.bad { border-color: #d6334c; }
 @media (max-width: 600px) { .quote { padding: 28px 22px; } .quote em { margin-left: 0; } }
 .shot.ph { display: grid; place-items: center; background: var(--grad); border: 0; position: relative; }
 .shot.ph::after { content: ''; position: absolute; right: -30px; bottom: -50px; width: 160px; height: 160px; border-radius: 50%; border: 1.5px solid rgba(255, 255, 255, 0.3); box-shadow: 0 0 0 28px rgba(255, 255, 255, 0.06); }
-.shot.ph span { color: #fff; font-weight: 800; font-size: 2.6rem; letter-spacing: -0.04em; position: relative; z-index: 1; }
+.shot.ph span { color: #fff; font-weight: 700; font-size: 2.6rem; letter-spacing: -0.04em; position: relative; z-index: 1; }
 
 /* ───────── Mobile refinements (phones) ───────── */
 @media (max-width: 600px) {
@@ -460,7 +460,7 @@ a > .shot { cursor: pointer; }
 .glance-head p { font-size: 1.08rem; color: var(--mute); }
 .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; }
 .metrics > div { background: #fff; padding: 36px 24px; text-align: center; display: grid; gap: 6px; }
-.metrics strong { font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; color: var(--navy); font-variant-numeric: tabular-nums; }
+.metrics strong { font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; color: var(--navy); font-variant-numeric: tabular-nums; }
 .metrics > div:nth-child(even) strong { color: var(--blue); }
 .metrics span { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mute); }
 @media (max-width: 960px) { .metrics { grid-template-columns: repeat(2, 1fr); } }
@@ -481,3 +481,27 @@ a > .shot { cursor: pointer; }
   .pagehead { padding-top: calc(44px + var(--nav-h)); }
   .nf { padding-top: calc(80px + var(--nav-h)); }
 }
+
+/* ───────── Type weights (hierarchy modelled on bugswriter.ai) ─────────
+   700 bold: headings, numbers, small uppercase labels
+   300 light: large lead paragraphs under headings
+   500 medium: card / supporting copy, nav links, chips
+   600 semibold: buttons, metric labels     400 regular: everything else */
+:root { --lead: #5b6684; }
+h1, h2, h3 { font-weight: 700; }
+h1 { letter-spacing: -0.03em; }
+h2 { letter-spacing: -0.025em; }
+.eyebrow, .num, .case small { font-weight: 700; }
+
+.hero p.lead, .pagehead p, .head p, .intro p, .glance-head p, .final p, .nf p { font-weight: 300; color: var(--lead); }
+.final p { color: #c3cbe8; }
+.hero p.lead, .pagehead p, .glance-head p { font-size: 1.15rem; line-height: 1.7; }
+
+.svc p, .svc small, .case p, .ind p, .step p, .why p, .row p.b, .side p, .copy-col p, .tcard blockquote { font-weight: 500; }
+.row p.b, .copy-col p { font-weight: 400; }
+.step::before, .nf .big { font-weight: 700; }
+.metrics strong { font-weight: 700; }
+.tlead blockquote, .quote blockquote { font-weight: 500; }
+.tag, .logo, .filters button, .chips li { font-weight: 500; }
+.logo { font-weight: 600; }
+@media (max-width: 600px) { .hero p.lead, .pagehead p, .glance-head p { font-size: 1.02rem; } }
