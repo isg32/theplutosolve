@@ -1,6 +1,6 @@
 import { Link } from 'react-router'
 import { Marquee, Orbit, ServiceIcon } from '../components/graphics'
-import HeroVisual from '../components/HeroVisual'
+import HeroCards from '../components/HeroCards'
 import Page from '../components/Page'
 import { Btn, Clients, FinalCTA, MoreLink, SectionHead, Tags } from '../components/ui'
 import { clients, industries, process, projects, services, whyPoints } from '../data/content'
@@ -33,7 +33,7 @@ export default function Home() {
               <Btn to="/our-work" variant="s" arrow={false}>See Our Work</Btn>
             </div>
           </div>
-          <HeroVisual />
+          <HeroCards />
         </div>
       </section>
 
