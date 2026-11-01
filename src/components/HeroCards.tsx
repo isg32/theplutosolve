@@ -15,14 +15,14 @@ function Orbit360() {
     <svg className="o360" viewBox="0 0 64 64" aria-hidden="true">
       <defs>
         <linearGradient id={`${id}g`} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#6a5c9a" />
-          <stop offset="1" stopColor="#7a66a8" />
+          <stop offset="0" stopColor="#355aa8" />
+          <stop offset="1" stopColor="#6942a5" />
         </linearGradient>
       </defs>
-      <circle cx="32" cy="32" r="25" fill="none" stroke="#e8e6ef" strokeWidth="2" />
+      <circle cx="32" cy="32" r="25" fill="none" stroke="#e5e8f0" strokeWidth="2" />
       <circle className="o-ring" cx="32" cy="32" r="25" fill="none" stroke={`url(#${id}g)`} strokeWidth="2.6" strokeLinecap="round" pathLength={1} strokeDasharray="1" transform="rotate(-90 32 32)" />
-      <circle cx="32" cy="32" r="15" fill="none" stroke="#e8e6ef" strokeWidth="1.2" strokeDasharray="2 4" />
-      <g className="o-dot"><circle cx="32" cy="7" r="4.2" fill={`url(#${id}g)`} /><circle cx="32" cy="7" r="7.5" fill="#6a5c9a" opacity="0.14" /></g>
+      <circle cx="32" cy="32" r="15" fill="none" stroke="#e5e8f0" strokeWidth="1.2" strokeDasharray="2 4" />
+      <g className="o-dot"><circle cx="32" cy="7" r="4.2" fill="#168FEA" /><circle cx="32" cy="7" r="7.5" fill="#168FEA" opacity="0.16" /></g>
     </svg>
   )
 }
@@ -33,8 +33,8 @@ function Rocket() {
     <svg className="rocket" viewBox="0 0 64 64" aria-hidden="true">
       <defs>
         <linearGradient id={`${id}b`} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#7a64ad" />
-          <stop offset="1" stopColor="#5e4d93" />
+          <stop offset="0" stopColor="#4a6fc0" />
+          <stop offset="1" stopColor="#4937a8" />
         </linearGradient>
         <linearGradient id={`${id}f`} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stopColor="#f3d9a4" />
@@ -47,9 +47,9 @@ function Rocket() {
         </radialGradient>
       </defs>
       {/* exhaust plume (stays behind while the rocket moves) */}
-      {Array.from({ length: 7 }, (_, i) => <circle key={i} className="rk-trail" cx="32" cy="52" r={5 + (i % 3)} fill="#e0dcea" opacity="0" />)}
-      {Array.from({ length: 4 }, (_, i) => <circle key={i} className="rk-puff" cx="32" cy="54" r="7" fill="#e8e5ef" opacity="0" />)}
-      <circle className="rk-shock" cx="32" cy="50" r="8" fill="none" stroke="#b0a6cc" strokeWidth="1.6" opacity="0" />
+      {Array.from({ length: 7 }, (_, i) => <circle key={i} className="rk-trail" cx="32" cy="52" r={5 + (i % 3)} fill="#e2e6f0" opacity="0" />)}
+      {Array.from({ length: 4 }, (_, i) => <circle key={i} className="rk-puff" cx="32" cy="54" r="7" fill="#e6eaf3" opacity="0" />)}
+      <circle className="rk-shock" cx="32" cy="50" r="8" fill="none" stroke="#a9b4d0" strokeWidth="1.6" opacity="0" />
       {Array.from({ length: 10 }, (_, i) => <circle key={i} className="rk-spark" cx="32" cy="52" r="1.8" fill={i % 2 ? '#e0a45a' : '#d27a52'} opacity="0" />)}
       <g className="rk">
         <circle className="rk-glow" cx="32" cy="54" r="16" fill={`url(#${id}r)`} opacity="0" />
@@ -60,13 +60,13 @@ function Rocket() {
             <path d="M30.8 46 Q32 55 33.2 46 Z" fill="#fff" />
           </g>
         </g>
-        <path d="M21 33 L11 46 L11 52 L22 46.5 Z" fill="#25203f" />
-        <path d="M43 33 L53 46 L53 52 L42 46.5 Z" fill="#25203f" />
+        <path d="M21 33 L11 46 L11 52 L22 46.5 Z" fill="#16224a" />
+        <path d="M43 33 L53 46 L53 52 L42 46.5 Z" fill="#16224a" />
         <path d="M32 4 C46 13 48 32 43.5 47 H20.5 C16 32 18 13 32 4 Z" fill={`url(#${id}b)`} />
         <path d="M32 4 C40 10 44 20 44 30 C40 22 37 14 32 4 Z" fill="#fff" opacity="0.22" />
-        <rect x="22" y="44" width="20" height="4.5" rx="1.5" fill="#25203f" />
-        <circle cx="32" cy="25" r="6.2" fill="#25203f" />
-        <circle cx="32" cy="25" r="4.6" fill="#cfc7e3" />
+        <rect x="22" y="44" width="20" height="4.5" rx="1.5" fill="#16224a" />
+        <circle cx="32" cy="25" r="6.2" fill="#16224a" />
+        <circle cx="32" cy="25" r="4.6" fill="#cdd5ea" />
         <circle cx="30.4" cy="23.4" r="1.4" fill="#fff" opacity="0.9" />
       </g>
     </svg>
@@ -98,7 +98,7 @@ function BgDial() {
           return <path key={i} className="tk" d={`M${DIAL.x} ${DIAL.y - 58} v${major ? 4.2 : 2.2}`} transform={`rotate(${i * 5} ${DIAL.x} ${DIAL.y})`} stroke={major ? '#BDB2DA' : '#D4CCE6'} strokeWidth={major ? 0.6 : 0.4} />
         })}
       </g>
-      <g className="sweep"><path d={`M${DIAL.x} ${DIAL.y} L${DIAL.x} ${DIAL.y - 58} A58 58 0 0 1 ${DIAL.x + 58 * Math.sin(0.6)} ${DIAL.y - 58 * Math.cos(0.6)} Z`} fill="rgba(106, 92, 154, 0.09)" /></g>
+      <g className="sweep"><path d={`M${DIAL.x} ${DIAL.y} L${DIAL.x} ${DIAL.y - 58} A58 58 0 0 1 ${DIAL.x + 58 * Math.sin(0.6)} ${DIAL.y - 58 * Math.cos(0.6)} Z`} fill="rgba(53, 90, 168, 0.09)" /></g>
       <circle cx={DIAL.x} cy={DIAL.y} r="1.1" fill="#BDB2DA" />
     </svg>
   )
@@ -202,8 +202,8 @@ function BgRoi() {
         </g>
       ))}
       <g className="rider" opacity="0">
-        <circle r="3.2" fill="#7d6797" opacity=".16" />
-        <circle r="1.4" fill="#7d6797" />
+        <circle r="3.2" fill="#6942a5" opacity=".16" />
+        <circle r="1.4" fill="#6942a5" />
       </g>
     </svg>
   )
@@ -219,11 +219,11 @@ function FabricBg() {
     <svg className="fab-bg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
       <defs>
         <pattern id={`${id}w`} width="3" height="3" patternUnits="userSpaceOnUse">
-          <rect width="3" height="3" fill="#f5f3f9" />
-          <path d="M0 .25 H3 M.25 0 V3" stroke="#e9e6f0" strokeWidth=".5" />
+          <rect width="3" height="3" fill="#f3f5f9" />
+          <path d="M0 .25 H3 M.25 0 V3" stroke="#e7eaf1" strokeWidth=".5" />
         </pattern>
         <pattern id={`${id}t`} width="12" height="12" patternUnits="userSpaceOnUse">
-          <path d="M0 6 H12 M6 0 V12" stroke="#e1ddea" strokeWidth=".35" />
+          <path d="M0 6 H12 M6 0 V12" stroke="#dee3ec" strokeWidth=".35" />
         </pattern>
       </defs>
       <g transform={FRAME}>
@@ -245,8 +245,8 @@ function FabricBg() {
 
 const SKIN = '#E2B9A0'
 const SKIN_EDGE = '#C99A7E'
-const STEEL = '#c3bdd6'
-const INK = '#25203f'
+const STEEL = '#b9c2d4'
+const INK = '#16224a'
 
 function Blade({ dir }: { dir: 1 | -1 }) {
   // dir -1 = upper blade (thumb), +1 = lower blade (fingers). Pivot is the origin.
@@ -273,8 +273,8 @@ function FabricFg() {
           <g className="sc">
             {/* sleeve, cuff and hand (drawn at full size, scaled down to sit right on the card) */}
             <g transform="scale(0.62)">
-            <path d="M-175 -6.5 H-35 Q-32.5 0 -35 6.5 H-175 Z" fill="#3b3358" />
-            <rect x="-41" y="-7.4" width="6.4" height="14.8" rx="2" fill="#4d4470" />
+            <path d="M-175 -6.5 H-35 Q-32.5 0 -35 6.5 H-175 Z" fill="#2b3a62" />
+            <rect x="-41" y="-7.4" width="6.4" height="14.8" rx="2" fill="#3b4b78" />
             <path d="M-36 -6.4 C-34 -9.4 -26 -9.4 -22.5 -7 L-19.5 -3.8 L-19.5 3.8 L-22.5 7 C-26 9.4 -34 9.4 -36 6.4 Z" fill={SKIN} stroke={SKIN_EDGE} strokeWidth=".5" />
             <g className="bl-u"><Blade dir={-1} /></g>
             <g className="bl-l"><Blade dir={1} /></g>
@@ -453,7 +453,7 @@ export default function HeroCards() {
             3.5,
           )
           .to($(c4, '.spk'), { scale: 0, opacity: 0, duration: 0.4, stagger: 0.07, ease: 'power2.in' }, 4.15)
-          .fromTo(c4, { boxShadow: '0 24px 60px -28px rgba(30, 27, 54,0.28)' }, { boxShadow: '0 0 0 4px rgba(106, 160, 132,0.28), 0 30px 60px -22px rgba(95, 154, 122,0.5)', duration: 0.35, yoyo: true, repeat: 1, ease: 'power2.out' }, 3.2)
+          .fromTo(c4, { boxShadow: '0 24px 60px -28px rgba(17, 27, 58,0.28)' }, { boxShadow: '0 0 0 4px rgba(106, 160, 132,0.28), 0 30px 60px -22px rgba(95, 154, 122,0.5)', duration: 0.35, yoyo: true, repeat: 1, ease: 'power2.out' }, 3.2)
         bills.forEach((b, i) => {
           const d = rand(1.1, 1.8)
           const at = 0.45 + i * 0.04 + rand(0, 0.1)
