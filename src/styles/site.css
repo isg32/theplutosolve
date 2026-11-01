@@ -609,3 +609,10 @@ h2 { letter-spacing: -0.025em; }
 .bg-roi .breathe { transform-box: fill-box; transform-origin: 50% 100%; animation: breathe 3.4s ease-in-out infinite alternate; }
 .bg-roi .rfloat { animation: rfloat 7s ease-in-out infinite alternate; }
 .bg-roi .cdust { opacity: 0; animation: cdust 9s ease-in-out infinite; }
+
+/* Polish: constellation, ring/planet wobble on both arcs, soft card highlight */
+@keyframes const-fade { 0%, 8% { opacity: 0; } 30%, 62% { opacity: 0.7; } 90%, 100% { opacity: 0; } }
+.bg-space .const { stroke-dasharray: 1.2 1.2; opacity: 0; animation: const-fade 12s ease-in-out infinite; }
+.bg-space .shoot { filter: none; }
+.hc { box-shadow: var(--shadow-card), inset 0 1px 0 rgba(255, 255, 255, 0.9); }
+.bg-space .ring-e { transform-box: view-box; transform-origin: 88px 78px; transform: rotate(-16deg); }

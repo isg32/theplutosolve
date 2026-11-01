@@ -116,13 +116,29 @@ const DUST = Array.from({ length: 9 }, (_, i) => ({ x: 8 + i * 10.4 + rs() * 4, 
 const Star = ({ st }: { st: (typeof STARS)[number] }) => (
   <circle className="star twk" cx={st.x} cy={st.y} r={st.r} fill="#8E81BA" opacity={st.o} style={{ animationDelay: `${st.d}s` }} />
 )
+// a small constellation that draws itself in and fades out, on repeat
+const CONST_PTS = STARS.filter((st) => st.r >= 0.4 && st.x > 40 && st.x < 80 && st.y > 24 && st.y < 70).sort((p, q) => p.x - q.x).slice(0, 5).map((st) => [st.x, st.y] as const)
 function BgSpace() {
+  const id = useId().replace(/:/g, '')
   return (
     <svg className="bg-art bg-space" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <radialGradient id={`${id}p`} cx="0.35" cy="0.3" r="0.85">
+          <stop offset="0" stopColor="#FAF7FD" />
+          <stop offset="0.55" stopColor="#E9E3F4" />
+          <stop offset="1" stopColor="#CFC5E6" />
+        </radialGradient>
+        <linearGradient id={`${id}s`} x1="1" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#8E81BA" stopOpacity="0.95" />
+          <stop offset="1" stopColor="#8E81BA" stopOpacity="0" />
+        </linearGradient>
+        <clipPath id={`${id}c`}><circle cx="88" cy="78" r="11" /></clipPath>
+      </defs>
       <path className="traj" d="M6 96 Q 34 52 70 6" fill="none" stroke="#D3CAE8" strokeWidth=".5" strokeDasharray="1.6 2.6" strokeLinecap="round" />
       <g className="stars">
         <g className="drift-far">{FAR.map((st, i) => <Star key={i} st={st} />)}</g>
         <g className="drift-near">
+          <polyline className="const" points={CONST_PTS.map((q) => q.join(',')).join(' ')} fill="none" stroke="#B7ABD6" strokeWidth=".28" strokeLinejoin="round" />
           {NEAR.map((st, i) => <Star key={i} st={st} />)}
           {[[18, 24], [64, 20], [90, 50], [30, 78]].map(([x, y], i) => (
             <path key={i} className="star twk spark4" d={`M${x} ${y - 2.4} L${x + 0.7} ${y - 0.7} L${x + 2.4} ${y} L${x + 0.7} ${y + 0.7} L${x} ${y + 2.4} L${x - 0.7} ${y + 0.7} L${x - 2.4} ${y} L${x - 0.7} ${y - 0.7} Z`} fill="#A598CB" opacity=".55" style={{ animationDelay: `${i * 0.8}s` }} />
@@ -130,13 +146,18 @@ function BgSpace() {
         </g>
       </g>
       {DUST.map((d, i) => <circle key={i} className="dust" cx={d.x} cy={d.y} r={d.r} fill="#B3A7D4" style={{ animationDelay: `${d.d}s` }} />)}
-      <path className="shoot" d="M0 0 L-9 3.6" stroke="#8E81BA" strokeWidth=".6" strokeLinecap="round" fill="none" />
-      <path className="shoot s2" d="M0 0 L-7 2.8" stroke="#A598CB" strokeWidth=".5" strokeLinecap="round" fill="none" />
+      <g className="shoot"><path d="M0 0 L-11 4.4" stroke={`url(#${id}s)`} strokeWidth=".7" strokeLinecap="round" fill="none" /><circle r=".6" fill="#8E81BA" /></g>
+      <g className="shoot s2"><path d="M0 0 L-8.5 3.4" stroke={`url(#${id}s)`} strokeWidth=".55" strokeLinecap="round" fill="none" /><circle r=".5" fill="#A598CB" /></g>
       <g className="planet">
         <g className="bob">
-          <circle cx="88" cy="78" r="11" fill="#EDE8F6" stroke="#D9D1EC" strokeWidth=".5" />
-          <path d="M80 74 Q88 70 97 75" fill="none" stroke="#D9D1EC" strokeWidth=".6" />
-          <ellipse className="ring-e" cx="88" cy="78" rx="17" ry="4" fill="none" stroke="#CFC6E3" strokeWidth=".6" />
+          <g className="ring-e"><path d="M71 78 A17 4 0 0 1 105 78" fill="none" stroke="#D3CAE8" strokeWidth=".6" /></g>
+          <circle cx="88" cy="78" r="11" fill={`url(#${id}p)`} stroke="#DAD2EC" strokeWidth=".4" />
+          <g clipPath={`url(#${id}c)`}>
+            <path d="M76 75 Q88 71 100 76" fill="none" stroke="#DDD5EE" strokeWidth=".7" />
+            <path d="M76.5 81 Q88 78 99.5 82" fill="none" stroke="#DDD5EE" strokeWidth=".5" />
+            <circle cx="94" cy="84" r="9" fill="#9D8FC6" opacity=".12" />
+          </g>
+          <g className="ring-e"><path d="M71 78 A17 4 0 0 0 105 78" fill="none" stroke="#C9BFE0" strokeWidth=".7" /></g>
         </g>
       </g>
       <g>{SPEED.map((l, i) => <path key={i} className="speed" d={`M${l.x} 0 v${l.h}`} stroke="#B3A7D4" strokeWidth=".5" strokeLinecap="round" opacity="0" />)}</g>
@@ -144,22 +165,42 @@ function BgSpace() {
   )
 }
 
-/** ROI — graph paper that slowly pans, bars that breathe, a ₹ that floats, and a glowing dot that
-    rides the trend line. */
+/** ROI — graph paper that slowly pans, bars that breathe, a ₹ that floats, a soft area under the
+    trend line, markers that ripple, and a glowing dot that rides the line. */
 const BARS = [10, 14, 12, 21, 18, 29, 27, 38, 47]
 const TREND: [number, number][] = [[10, 78], [20, 74], [30, 76], [40, 66], [50, 68], [60, 55], [70, 57], [80, 43], [91, 33]]
 const TREND_D = 'M' + TREND.map((p) => p.join(' ')).join(' L')
+const AREA_D = `${TREND_D} L91 88 L10 88 Z`
 const COIN_DUST = [{ x: 14, d: 0, t: '₹' }, { x: 46, d: 2.6, t: '₹' }, { x: 74, d: 4.8, t: '₹' }, { x: 30, d: 6.4, t: '+' }, { x: 90, d: 1.4, t: '+' }]
 function BgRoi() {
+  const id = useId().replace(/:/g, '')
   return (
     <svg className="bg-art bg-roi" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <linearGradient id={`${id}b`} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#DDD6EC" />
+          <stop offset="1" stopColor="#F3F0F9" />
+        </linearGradient>
+        <linearGradient id={`${id}a`} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#CFC6E6" stopOpacity="0.55" />
+          <stop offset="1" stopColor="#CFC6E6" stopOpacity="0" />
+        </linearGradient>
+      </defs>
       <g className="gridmove">
         <path className="grid" d={Array.from({ length: 14 }, (_, i) => `M${i * 10 - 10} -10 V110 M-10 ${i * 10 - 10} H110`).join(' ')} stroke="#ECE8F4" strokeWidth=".3" fill="none" />
       </g>
       <g className="rfloat"><text className="rupee" x="70" y="52" fontSize="46" fontWeight="700" fill="#F1EEF7">₹</text></g>
       {COIN_DUST.map((c, i) => <text key={i} className="cdust" x={c.x} y="84" fontSize="5" fontWeight="700" fill="#CFC6E3" style={{ animationDelay: `${c.d}s` }}>{c.t}</text>)}
-      <g>{BARS.map((h, i) => <g key={i} className="bar"><rect className="breathe" x={7 + i * 9.6} y={88 - h} width="6.4" height={h + 14} rx="1.2" fill="#EBE7F4" style={{ animationDelay: `${i * 0.28}s` }} /></g>)}</g>
-      <path className="btrend" d={TREND_D} pathLength={1} fill="none" stroke="#D2C9E6" strokeWidth=".9" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="1" />
+      <path className="barea" d={AREA_D} fill={`url(#${id}a)`} />
+      <g>{BARS.map((h, i) => <g key={i} className="bar"><rect className="breathe" x={7 + i * 9.6} y={88 - h} width="6.4" height={h + 14} rx="1.4" fill={`url(#${id}b)`} style={{ animationDelay: `${i * 0.28}s` }} /></g>)}</g>
+      <path className="axis" d="M4 88 H96" stroke="#DDD7EB" strokeWidth=".4" />
+      <path className="btrend" d={TREND_D} pathLength={1} fill="none" stroke="#C9BFE2" strokeWidth=".95" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="1" />
+      {TREND.map(([x, y], i) => (
+        <g key={i} className="mkg">
+          <circle className="mk-ring" cx={x} cy={y} r="1.2" fill="none" stroke="#8E7FBF" strokeWidth=".45" opacity="0" />
+          <circle className="mk" cx={x} cy={y} r=".95" fill="#fff" stroke="#BDB1DA" strokeWidth=".5" />
+        </g>
+      ))}
       <g className="rider" opacity="0">
         <circle r="3.2" fill="#7d6797" opacity=".16" />
         <circle r="1.4" fill="#7d6797" />
@@ -428,9 +469,14 @@ export default function HeroCards() {
           .fromTo($(c4, '.bar'), { scaleY: 0, transformOrigin: '50% 100%' }, { scaleY: 1, duration: 0.7, stagger: 0.07, ease: 'back.out(1.5)' }, 2.6)
           .fromTo($1(c4, '.btrend'), { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.9, ease: 'power2.inOut' }, 3.0)
           .from($1(c4, '.rupee'), { opacity: 0, duration: 0.9 }, 3.0)
+          .from($1(c4, '.barea'), { opacity: 0, duration: 1.1 }, 3.1)
+          .from($1(c4, '.axis'), { opacity: 0, duration: 0.6 }, 2.5)
+          .from($(c4, '.mk'), { opacity: 0, stagger: 0.09, duration: 0.4 }, 3.1)
         // a glowing dot keeps riding the trend line (started once the line has drawn)
         const rider = $1(c4, '.rider')
         const ride = { p: 0 }
+        const rings = $(c4, '.mk-ring')
+        let lastMk = -1
         t4.add(() => {
           ctx?.add(() => {
             gsap.set(rider, { opacity: 1 })
@@ -447,6 +493,13 @@ export default function HeroCards() {
                 const x = TREND[i][0] + (TREND[i + 1][0] - TREND[i][0]) * u
                 const y = TREND[i][1] + (TREND[i + 1][1] - TREND[i][1]) * u
                 gsap.set(rider, { x, y })
+                // ripple each marker as the dot passes over it
+                const near = Math.round(f)
+                if (Math.abs(f - near) < 0.08 && near !== lastMk) {
+                  lastMk = near
+                  gsap.fromTo(rings[near], { attr: { r: 1.2 }, opacity: 0.6 }, { attr: { r: 4.2 }, opacity: 0, duration: 0.8, ease: 'power2.out' })
+                }
+                if (ride.p < 0.02) lastMk = -1
               },
             })
           })
@@ -468,6 +521,10 @@ export default function HeroCards() {
             const rx = gsap.quickTo(card, 'rotationX', { duration: 0.6, ease: 'power3.out' })
             const ry = gsap.quickTo(card, 'rotationY', { duration: 0.6, ease: 'power3.out' })
             const ly = gsap.quickTo(card, 'y', { duration: 0.5, ease: 'power3.out' })
+            const bgs = $(card, '.bg-art, .fab-bg')
+            gsap.set(bgs, { scale: 1.07 })
+            const bx = bgs.map((el) => gsap.quickTo(el, 'x', { duration: 0.8, ease: 'power3.out' }))
+            const by = bgs.map((el) => gsap.quickTo(el, 'y', { duration: 0.8, ease: 'power3.out' }))
             const move = (e: PointerEvent) => {
               if (!tiltOn) return
               const r = card.getBoundingClientRect()
@@ -477,6 +534,8 @@ export default function HeroCards() {
               ry((px - 0.5) * 12)
               rx(-(py - 0.5) * 12)
               ly(-5)
+              bx.forEach((f) => f((0.5 - px) * 8))
+              by.forEach((f) => f((0.5 - py) * 8))
               card.style.setProperty('--mx', `${e.clientX - r.left}px`)
               card.style.setProperty('--my', `${e.clientY - r.top}px`)
             }
@@ -484,6 +543,8 @@ export default function HeroCards() {
               rx(0)
               ry(0)
               ly(0)
+              bx.forEach((f) => f(0))
+              by.forEach((f) => f(0))
             }
             card.addEventListener('pointermove', move)
             card.addEventListener('pointerleave', leave)
