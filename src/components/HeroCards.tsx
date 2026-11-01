@@ -104,39 +104,66 @@ function BgDial() {
   )
 }
 
-/** Growth-First — a night sky: twinkling stars, a small planet, and speed lines for blast-off. */
+/** Growth-First — a night sky that keeps moving: two star layers drifting at different speeds
+    (parallax), a bobbing planet, a flowing flight path, rising dust and the odd shooting star.
+    The groups the GSAP choreography touches (.stars, .planet) are separate from the ones CSS animates. */
 const rs = mulberry(11)
 const STARS = Array.from({ length: 46 }, () => ({ x: rs() * 100, y: 12 + rs() * 76, r: 0.28 + rs() * 0.62, o: 0.3 + rs() * 0.45, d: rs() * 3 }))
+const NEAR = STARS.filter((st) => st.r >= 0.55)
+const FAR = STARS.filter((st) => st.r < 0.55)
 const SPEED = Array.from({ length: 14 }, (_, i) => ({ x: 6 + i * 6.8 + rs() * 2, h: 10 + rs() * 16 }))
+const DUST = Array.from({ length: 9 }, (_, i) => ({ x: 8 + i * 10.4 + rs() * 4, y: 62 + rs() * 22, r: 0.5 + rs() * 0.5, d: rs() * 7 }))
+const Star = ({ st }: { st: (typeof STARS)[number] }) => (
+  <circle className="star twk" cx={st.x} cy={st.y} r={st.r} fill="#8E81BA" opacity={st.o} style={{ animationDelay: `${st.d}s` }} />
+)
 function BgSpace() {
   return (
     <svg className="bg-art bg-space" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
       <path className="traj" d="M6 96 Q 34 52 70 6" fill="none" stroke="#D3CAE8" strokeWidth=".5" strokeDasharray="1.6 2.6" strokeLinecap="round" />
       <g className="stars">
-        {STARS.map((st, i) => <circle key={i} className="star twk" cx={st.x} cy={st.y} r={st.r} fill="#8E81BA" opacity={st.o} style={{ animationDelay: `${st.d}s` }} />)}
-        {[[18, 24], [64, 20], [90, 50], [30, 78]].map(([x, y], i) => (
-          <path key={i} className="star twk" d={`M${x} ${y - 2.4} L${x + 0.7} ${y - 0.7} L${x + 2.4} ${y} L${x + 0.7} ${y + 0.7} L${x} ${y + 2.4} L${x - 0.7} ${y + 0.7} L${x - 2.4} ${y} L${x - 0.7} ${y - 0.7} Z`} fill="#A598CB" opacity=".55" style={{ animationDelay: `${i * 0.8}s` }} />
-        ))}
+        <g className="drift-far">{FAR.map((st, i) => <Star key={i} st={st} />)}</g>
+        <g className="drift-near">
+          {NEAR.map((st, i) => <Star key={i} st={st} />)}
+          {[[18, 24], [64, 20], [90, 50], [30, 78]].map(([x, y], i) => (
+            <path key={i} className="star twk spark4" d={`M${x} ${y - 2.4} L${x + 0.7} ${y - 0.7} L${x + 2.4} ${y} L${x + 0.7} ${y + 0.7} L${x} ${y + 2.4} L${x - 0.7} ${y + 0.7} L${x - 2.4} ${y} L${x - 0.7} ${y - 0.7} Z`} fill="#A598CB" opacity=".55" style={{ animationDelay: `${i * 0.8}s` }} />
+          ))}
+        </g>
       </g>
+      {DUST.map((d, i) => <circle key={i} className="dust" cx={d.x} cy={d.y} r={d.r} fill="#B3A7D4" style={{ animationDelay: `${d.d}s` }} />)}
+      <path className="shoot" d="M0 0 L-9 3.6" stroke="#8E81BA" strokeWidth=".6" strokeLinecap="round" fill="none" />
+      <path className="shoot s2" d="M0 0 L-7 2.8" stroke="#A598CB" strokeWidth=".5" strokeLinecap="round" fill="none" />
       <g className="planet">
-        <circle cx="88" cy="78" r="11" fill="#EDE8F6" stroke="#D9D1EC" strokeWidth=".5" />
-        <path d="M80 74 Q88 70 97 75" fill="none" stroke="#D9D1EC" strokeWidth=".6" />
-        <ellipse cx="88" cy="78" rx="17" ry="4" fill="none" stroke="#CFC6E3" strokeWidth=".6" transform="rotate(-16 88 78)" />
+        <g className="bob">
+          <circle cx="88" cy="78" r="11" fill="#EDE8F6" stroke="#D9D1EC" strokeWidth=".5" />
+          <path d="M80 74 Q88 70 97 75" fill="none" stroke="#D9D1EC" strokeWidth=".6" />
+          <ellipse className="ring-e" cx="88" cy="78" rx="17" ry="4" fill="none" stroke="#CFC6E3" strokeWidth=".6" />
+        </g>
       </g>
       <g>{SPEED.map((l, i) => <path key={i} className="speed" d={`M${l.x} 0 v${l.h}`} stroke="#B3A7D4" strokeWidth=".5" strokeLinecap="round" opacity="0" />)}</g>
     </svg>
   )
 }
 
-/** ROI — graph paper with rising bars, a trend line and a ₹ watermark. */
+/** ROI — graph paper that slowly pans, bars that breathe, a ₹ that floats, and a glowing dot that
+    rides the trend line. */
 const BARS = [10, 14, 12, 21, 18, 29, 27, 38, 47]
+const TREND: [number, number][] = [[10, 78], [20, 74], [30, 76], [40, 66], [50, 68], [60, 55], [70, 57], [80, 43], [91, 33]]
+const TREND_D = 'M' + TREND.map((p) => p.join(' ')).join(' L')
+const COIN_DUST = [{ x: 14, d: 0, t: '₹' }, { x: 46, d: 2.6, t: '₹' }, { x: 74, d: 4.8, t: '₹' }, { x: 30, d: 6.4, t: '+' }, { x: 90, d: 1.4, t: '+' }]
 function BgRoi() {
   return (
     <svg className="bg-art bg-roi" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-      <path className="grid" d={Array.from({ length: 11 }, (_, i) => `M${i * 10} 0 V100 M0 ${i * 10} H100`).join(' ')} stroke="#ECE8F4" strokeWidth=".3" fill="none" />
-      <text className="rupee" x="70" y="52" fontSize="46" fontWeight="700" fill="#F1EEF7">₹</text>
-      <g>{BARS.map((h, i) => <rect key={i} className="bar" x={7 + i * 9.6} y={88 - h} width="6.4" height={h + 14} rx="1.2" fill="#EBE7F4" />)}</g>
-      <path className="btrend" d="M10 78 L20 74 L30 76 L40 66 L50 68 L60 55 L70 57 L80 43 L91 33" pathLength={1} fill="none" stroke="#D2C9E6" strokeWidth=".9" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="1" />
+      <g className="gridmove">
+        <path className="grid" d={Array.from({ length: 14 }, (_, i) => `M${i * 10 - 10} -10 V110 M-10 ${i * 10 - 10} H110`).join(' ')} stroke="#ECE8F4" strokeWidth=".3" fill="none" />
+      </g>
+      <g className="rfloat"><text className="rupee" x="70" y="52" fontSize="46" fontWeight="700" fill="#F1EEF7">₹</text></g>
+      {COIN_DUST.map((c, i) => <text key={i} className="cdust" x={c.x} y="84" fontSize="5" fontWeight="700" fill="#CFC6E3" style={{ animationDelay: `${c.d}s` }}>{c.t}</text>)}
+      <g>{BARS.map((h, i) => <g key={i} className="bar"><rect className="breathe" x={7 + i * 9.6} y={88 - h} width="6.4" height={h + 14} rx="1.2" fill="#EBE7F4" style={{ animationDelay: `${i * 0.28}s` }} /></g>)}</g>
+      <path className="btrend" d={TREND_D} pathLength={1} fill="none" stroke="#D2C9E6" strokeWidth=".9" strokeLinecap="round" strokeLinejoin="round" strokeDasharray="1" />
+      <g className="rider" opacity="0">
+        <circle r="3.2" fill="#7d6797" opacity=".16" />
+        <circle r="1.4" fill="#7d6797" />
+      </g>
     </svg>
   )
 }
@@ -401,6 +428,29 @@ export default function HeroCards() {
           .fromTo($(c4, '.bar'), { scaleY: 0, transformOrigin: '50% 100%' }, { scaleY: 1, duration: 0.7, stagger: 0.07, ease: 'back.out(1.5)' }, 2.6)
           .fromTo($1(c4, '.btrend'), { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.9, ease: 'power2.inOut' }, 3.0)
           .from($1(c4, '.rupee'), { opacity: 0, duration: 0.9 }, 3.0)
+        // a glowing dot keeps riding the trend line (started once the line has drawn)
+        const rider = $1(c4, '.rider')
+        const ride = { p: 0 }
+        t4.add(() => {
+          ctx?.add(() => {
+            gsap.set(rider, { opacity: 1 })
+            gsap.to(ride, {
+              p: 1,
+              duration: 5.5,
+              ease: 'sine.inOut',
+              repeat: -1,
+              repeatDelay: 1.2,
+              onUpdate() {
+                const f = ride.p * (TREND.length - 1)
+                const i = Math.min(TREND.length - 2, Math.floor(f))
+                const u = f - i
+                const x = TREND[i][0] + (TREND[i + 1][0] - TREND[i][0]) * u
+                const y = TREND[i][1] + (TREND[i + 1][1] - TREND[i][1]) * u
+                gsap.set(rider, { x, y })
+              },
+            })
+          })
+        }, 4.0)
         settle(t4, c4)
 
         let tiltOn = false

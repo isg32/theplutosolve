@@ -581,3 +581,31 @@ h2 { letter-spacing: -0.025em; }
 .bg-space .twk { animation: twk 3.2s ease-in-out infinite alternate; }
 @keyframes twk { from { opacity: 0.25; } to { opacity: 0.85; } }
 .hc .hc-title, .hc .hc-label { text-shadow: 0 0 6px #fff, 0 0 10px #fff; }
+
+/* Ambient motion for the Growth-First and ROI backdrops */
+@keyframes drift-near { from { transform: translate(0, 0); } to { transform: translate(-3.2px, 2.2px); } }
+@keyframes drift-far { from { transform: translate(0, 0); } to { transform: translate(-1.4px, 1px); } }
+@keyframes bob { from { transform: translateY(-1.3px); } to { transform: translateY(1.3px); } }
+@keyframes ring-wob { from { transform: rotate(-22deg); } to { transform: rotate(-10deg); } }
+@keyframes dash-flow { to { stroke-dashoffset: -4.2; } }
+@keyframes dust-rise { 0% { opacity: 0; transform: translateY(0); } 25% { opacity: 0.75; } 100% { opacity: 0; transform: translateY(-24px); } }
+@keyframes shoot { 0% { opacity: 0; transform: translate(94px, 16px); } 3% { opacity: 1; } 11% { opacity: 0; transform: translate(52px, 33px); } 100% { opacity: 0; transform: translate(52px, 33px); } }
+@keyframes spark-pulse { from { transform: scale(0.7); } to { transform: scale(1.15); } }
+.bg-space .drift-near { animation: drift-near 20s ease-in-out infinite alternate; }
+.bg-space .drift-far { animation: drift-far 30s ease-in-out infinite alternate; }
+.bg-space .bob { animation: bob 6s ease-in-out infinite alternate; }
+.bg-space .ring-e { transform-box: fill-box; transform-origin: 50% 50%; animation: ring-wob 7s ease-in-out infinite alternate; }
+.bg-space .traj { animation: dash-flow 4.5s linear infinite; }
+.bg-space .dust { opacity: 0; animation: dust-rise 8s ease-in-out infinite; }
+.bg-space .shoot { opacity: 0; animation: shoot 9s ease-in infinite; }
+.bg-space .shoot.s2 { animation-delay: 4.6s; animation-duration: 11s; }
+.bg-space .spark4 { transform-box: fill-box; transform-origin: 50% 50%; animation: twk 3.2s ease-in-out infinite alternate, spark-pulse 3.6s ease-in-out infinite alternate; }
+
+@keyframes grid-pan { from { transform: translate(0, 0); } to { transform: translate(-5px, -5px); } }
+@keyframes breathe { from { transform: scaleY(0.92); } to { transform: scaleY(1.05); } }
+@keyframes rfloat { from { transform: translateY(-1.6px); } to { transform: translateY(1.6px); } }
+@keyframes cdust { 0% { opacity: 0; transform: translateY(0); } 25% { opacity: 0.8; } 100% { opacity: 0; transform: translateY(-30px); } }
+.bg-roi .gridmove { animation: grid-pan 16s ease-in-out infinite alternate; }
+.bg-roi .breathe { transform-box: fill-box; transform-origin: 50% 100%; animation: breathe 3.4s ease-in-out infinite alternate; }
+.bg-roi .rfloat { animation: rfloat 7s ease-in-out infinite alternate; }
+.bg-roi .cdust { opacity: 0; animation: cdust 9s ease-in-out infinite; }
