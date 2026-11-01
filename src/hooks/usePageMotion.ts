@@ -1,5 +1,5 @@
 import { useLayoutEffect, type RefObject } from 'react'
-import { gsap, ScrollTrigger, prefersReducedMotion } from '../lib/gsap'
+import { gsap, ScrollTrigger, prefersReducedMotion, whenReady } from '../lib/gsap'
 
 /**
  * Declarative motion for a page. Mark markup with data attributes:
@@ -15,7 +15,11 @@ export function usePageMotion(scope: RefObject<HTMLElement | null>) {
   useLayoutEffect(() => {
     const root = scope.current
     if (!root || prefersReducedMotion()) return
-    const ctx = gsap.context(() => {
+    let ctx: gsap.Context | undefined
+    let t: ReturnType<typeof setTimeout> | undefined
+    // Held while the loading screen is up, so entrances play after it lifts.
+    const cancel = whenReady(() => {
+    ctx = gsap.context(() => {
       const q = gsap.utils.toArray<HTMLElement>
 
       const hero = q('[data-hero-item]')
@@ -48,10 +52,12 @@ export function usePageMotion(scope: RefObject<HTMLElement | null>) {
           .from(f('.sc-pop'), { scale: 0, opacity: 0, transformOrigin: '50% 50%', stagger: 0.09, duration: 0.55, ease: 'back.out(1.7)' }, 0.3)
       })
     }, root)
-    const t = setTimeout(() => ScrollTrigger.refresh(), 150)
+    t = setTimeout(() => ScrollTrigger.refresh(), 150)
+    })
     return () => {
+      cancel()
       clearTimeout(t)
-      ctx.revert()
+      ctx?.revert()
     }
   }, [scope])
 }

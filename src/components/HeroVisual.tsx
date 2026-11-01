@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef } from 'react'
-import { gsap, prefersReducedMotion } from '../lib/gsap'
+import { gsap, prefersReducedMotion, whenReady } from '../lib/gsap'
 
 const bars = [35, 55, 45, 75, 62, 95]
 
@@ -7,7 +7,9 @@ export default function HeroVisual() {
   const ref = useRef<HTMLDivElement>(null)
   useLayoutEffect(() => {
     if (!ref.current || prefersReducedMotion()) return
-    const ctx = gsap.context(() => {
+    let ctx: gsap.Context | undefined
+    const cancel = whenReady(() => {
+    ctx = gsap.context(() => {
       const tl = gsap.timeline({ delay: 0.25, defaults: { ease: 'power2.out' } })
       tl.from('.v1', { opacity: 0, filter: 'blur(12px)', duration: 0.8 })
         .from('.v1 .ln', { scaleX: 0, stagger: 0.12, duration: 0.6 }, '-=0.5')
@@ -16,7 +18,11 @@ export default function HeroVisual() {
         .from('.v3', { opacity: 0, filter: 'blur(12px)', duration: 0.7 }, '-=0.35')
         .set('.v1, .v2, .v3', { clearProps: 'filter,opacity' })
     }, ref)
-    return () => ctx.revert()
+    })
+    return () => {
+      cancel()
+      ctx?.revert()
+    }
   }, [])
 
   return (

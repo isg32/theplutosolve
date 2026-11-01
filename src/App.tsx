@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router'
 import Footer from './components/Footer'
 import Header from './components/Header'
+import SiteLoader from './components/SiteLoader'
 import { BackToTop, ScrollToTop } from './components/Utilities'
 import About from './pages/About'
 import Contact from './pages/Contact'
@@ -13,6 +14,7 @@ import WhatWeDo from './pages/WhatWeDo'
 export default function App() {
   return (
     <>
+      <SiteLoader />
       <ScrollToTop />
       <Header />
       <main>
