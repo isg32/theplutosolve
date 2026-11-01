@@ -29,8 +29,7 @@ export default function Home() {
             <h1 data-hero-item>Good ideas deserve the right people to <span className="grad">make them happen.</span></h1>
             <p className="lead" data-hero-item>PlutoSolve helps businesses grow with marketing, websites, technology and creative solutions. Whether you need to reach more customers, build something digital or make your business work better, we bring the right skills together.</p>
             <div className="cta" data-hero-item>
-              <Btn to="/contact">Let’s Talk</Btn>
-              <Btn to="/our-work" variant="s" arrow={false}>See Our Work</Btn>
+              <Btn to="/our-work">See Our Work</Btn>
             </div>
           </div>
           <HeroCards />
