@@ -293,20 +293,21 @@ export default function HeroCards() {
         const t4 = gsap.timeline()
         const h = c4.offsetHeight
         const bills = $(c4, '.bill') as HTMLElement[]
-        const roi = $1(c4, '.hc-big')
+        const letters = $(c4, '.rl')
         enter(t4, c4, { scale: 0.9 })
-        t4.from(roi, { opacity: 0, filter: 'blur(16px)', scale: 0.8, duration: 0.9, ease: 'expo.out' }, 2.6)
-          .from($1(c4, '.trend'), { opacity: 0, duration: 0.3 }, 2.7)
-          .fromTo($1(c4, '.tr-line'), { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.8, ease: 'power2.inOut' }, 2.75)
-          .from($1(c4, '.tr-head'), { opacity: 0, scale: 0.4, transformOrigin: '100% 0%', duration: 0.35, ease: 'back.out(3)' }, 3.45)
+        // R · O · I: each letter rises out of blur and fades in, a beat after the one before
+        t4.fromTo(letters, { opacity: 0, y: 22, filter: 'blur(12px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.75, stagger: 0.14, ease: 'power3.out', clearProps: 'opacity,filter,transform' }, 2.6)
+          .from($1(c4, '.trend'), { opacity: 0, duration: 0.3 }, 3.0)
+          .fromTo($1(c4, '.tr-line'), { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.8, ease: 'power2.inOut' }, 3.05)
+          .from($1(c4, '.tr-head'), { opacity: 0, scale: 0.4, transformOrigin: '100% 0%', duration: 0.35, ease: 'back.out(3)' }, 3.75)
           .fromTo(
             $(c4, '.spk'),
             { scale: 0, opacity: 1, rotation: -30, transformOrigin: '50% 50%' },
             { scale: 1, rotation: 0, duration: 0.4, stagger: 0.07, ease: 'back.out(3)' },
-            3.2,
+            3.5,
           )
-          .to($(c4, '.spk'), { scale: 0, opacity: 0, duration: 0.4, stagger: 0.07, ease: 'power2.in' }, 3.85)
-          .fromTo(c4, { boxShadow: '0 24px 60px -28px rgba(21, 32, 59,0.28)' }, { boxShadow: '0 0 0 4px rgba(106, 160, 132,0.28), 0 30px 60px -22px rgba(95, 154, 122,0.5)', duration: 0.35, yoyo: true, repeat: 1, ease: 'power2.out' }, 2.9)
+          .to($(c4, '.spk'), { scale: 0, opacity: 0, duration: 0.4, stagger: 0.07, ease: 'power2.in' }, 4.15)
+          .fromTo(c4, { boxShadow: '0 24px 60px -28px rgba(21, 32, 59,0.28)' }, { boxShadow: '0 0 0 4px rgba(106, 160, 132,0.28), 0 30px 60px -22px rgba(95, 154, 122,0.5)', duration: 0.35, yoyo: true, repeat: 1, ease: 'power2.out' }, 3.2)
         bills.forEach((b, i) => {
           const d = rand(1.1, 1.8)
           const at = 0.45 + i * 0.04 + rand(0, 0.1)
@@ -403,7 +404,9 @@ export default function HeroCards() {
           ))}
         </div>
         <div className="hc-visual">
-          <span className="hc-big grad">ROI</span>
+          <span className="hc-big grad" aria-label="ROI">
+            {['R', 'O', 'I'].map((l) => <span className="rl" aria-hidden="true" key={l}>{l}</span>)}
+          </span>
           <Trend />
           <Sparkle x={86} y={4} s={1.2} />
           <Sparkle x={150} y={52} />
