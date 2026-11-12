@@ -19,9 +19,11 @@ type Real = { badge?: string; img: string; title: string; sub: string; alt: stri
 function RealShot({ badge, img, title, sub, alt, href, cta = 'Visit live page', bare, tall }: Real) {
   return (
     <figure className="car-fig">
-      <Frame bare={bare} className={tall ? 'tall' : ''}>
-        <img src={workImages[img]} alt={alt} loading="lazy" width="1200" height="750" />
-      </Frame>
+      <div className="media">
+        <Frame bare={bare} className={tall ? 'tall' : ''}>
+          <img src={workImages[img]} alt={alt} loading="lazy" width="1200" height="750" />
+        </Frame>
+      </div>
       <figcaption>
         <strong>{title}{badge && <em className="feat">{badge}</em>}</strong>
         <span>{sub}</span>
@@ -213,7 +215,7 @@ export default function OurWork() {
             <p>{testimonialsCopy.intro}</p>
           </div>
           <div className="tq-wrap" data-reveal>
-            <Carousel slides={quoteSlides} label="Client testimonials" autoplay={7000} />
+            <Carousel slides={quoteSlides} label="Client testimonials" autoplay={7000} fixed />
           </div>
         </div>
       </section>
