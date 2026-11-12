@@ -30,7 +30,7 @@ export default function Footer() {
           <div>
             <h4>Contact</h4>
             <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
-            <Social />
+            <Social label={false} />
           </div>
         </div>
         <div className="copy">© 2026 PlutoSolve. All rights reserved.</div>
