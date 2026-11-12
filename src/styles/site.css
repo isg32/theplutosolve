@@ -797,3 +797,95 @@ section[id] { scroll-margin-top: 88px; }
 .tq { box-shadow: 0 10px 28px -16px rgba(17, 27, 58, 0.3); }
 .car .frame { box-shadow: 0 12px 28px -18px rgba(17, 27, 58, 0.32); }
 .car-viewport { border-radius: 0; }
+
+/* ── Round 4: popup enquiry, nav button, social, why cards, alternating rows, slideshows ── */
+
+/* Let's Talk now matches the primary "See Our Work" button */
+.btn.nav-btn { padding: 10px 20px; font-size: 0.86rem; }
+.links .btn.nav-btn.mb { margin-top: 12px; padding: 14px 20px; width: 100%; justify-content: center; }
+@media (max-width: 960px) { .nav > .btn.nav-btn { display: none; } }
+@media (min-width: 961px) { .links .btn.nav-btn.mb { display: none; } }
+
+/* Popup holding the contact form */
+html.modal-open { overflow: hidden; }
+.enq-dlg { border: 0; padding: 0; background: transparent; width: min(580px, calc(100vw - 28px)); max-height: calc(100dvh - 28px); overflow: visible; color: var(--ink); }
+.enq-dlg::backdrop { background: rgba(17, 27, 58, 0.55); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.enq-dlg[open] { animation: enq-in 0.4s var(--ease) both; }
+.enq-dlg[open]::backdrop { animation: enq-fade 0.4s ease both; }
+@keyframes enq-in { from { opacity: 0; filter: blur(10px); } to { opacity: 1; filter: blur(0); } }
+@keyframes enq-fade { from { opacity: 0; } to { opacity: 1; } }
+.enq-box { position: relative; background: #fff; border-radius: 24px; padding: 34px 36px 36px; max-height: calc(100dvh - 28px); overflow-y: auto; box-shadow: 0 40px 90px -30px rgba(17, 27, 58, 0.55); }
+.enq-box .eyebrow { margin-bottom: 10px; }
+.enq-box h2 { font-size: clamp(1.4rem, 3vw, 1.75rem); margin: 0 0 22px; padding-right: 36px; }
+.enq-x { position: absolute; top: 16px; right: 16px; width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--line); background: #fff; display: grid; place-items: center; cursor: pointer; color: var(--navy); transition: border-color 0.2s, color 0.2s, transform 0.3s var(--ease); }
+.enq-x svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.enq-x:hover { border-color: var(--blue); color: var(--blue); transform: rotate(90deg); }
+form.card.in-modal { border: 0; box-shadow: none; padding: 0; border-radius: 0; background: none; gap: 16px; }
+form.card.in-modal > h3 { display: none; }
+@media (max-width: 600px) { .enq-box { padding: 26px 20px 28px; border-radius: 20px; } }
+
+/* Instagram / LinkedIn buttons */
+.social { display: flex; flex-wrap: wrap; gap: 10px; }
+.soc { display: inline-flex; align-items: center; gap: 9px; height: 42px; padding: 0 18px 0 14px; border-radius: 99px; border: 1.5px solid var(--line); background: #fff; color: var(--navy); font: 600 0.84rem 'Inter', sans-serif; transition: border-color 0.2s, color 0.2s, transform 0.25s var(--ease), background 0.2s; }
+.soc svg { width: 17px; height: 17px; fill: currentColor; flex: none; }
+.soc:hover { border-color: var(--blue); color: var(--blue); transform: translateY(-2px); }
+.social.dark .soc { background: rgba(255, 255, 255, 0.07); border-color: rgba(255, 255, 255, 0.28); color: #fff; }
+.social.dark .soc:hover { background: rgba(255, 255, 255, 0.16); border-color: #fff; color: #fff; }
+.final .social { justify-content: center; position: relative; }
+.final p.final-soc { margin: 30px auto 12px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #8e9bbd; }
+.fg .social { margin-top: 18px; }
+.fg .soc { display: inline-flex; margin: 0; font-size: 0.84rem; color: var(--navy); }
+.fg .soc:hover { color: var(--blue); }
+@media (max-width: 600px) { .final .btn { width: 100%; } }
+
+/* Why PlutoSolve: cards */
+.why { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.why > .why-card::before { display: none; }
+.why-card { padding: 34px 32px 32px; display: block; transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.35s; }
+.why-card:hover { transform: translateY(-4px); border-color: #cfd6ea; box-shadow: 0 28px 56px -30px rgba(17, 27, 58, 0.32); }
+.why-n { display: inline-grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: var(--lav); color: var(--violet); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.04em; margin-bottom: 18px; transition: background 0.3s, color 0.3s; }
+.why-card:hover .why-n { background: var(--grad); color: #fff; }
+.why-card h3 { margin: 0; }
+.why-card p { margin-top: 10px; }
+@media (max-width: 600px) { .why { gap: 14px; } .why-card { padding: 26px 22px; } }
+
+/* What we do: rows alternate sides */
+@media (min-width: 961px) {
+  .row.rev { grid-template-columns: 1.1fr 0.9fr; }
+  .row.rev > :first-child { order: 2; }
+}
+
+/* Slideshows: every slide is the same square on white, so nothing resizes between slides */
+.car.fixed .car-track { align-items: stretch; }
+.car.fixed .car-viewport { transition: none; }
+.car.fixed .car-fig { display: flex; flex-direction: column; height: 100%; }
+.car.fixed .car-fig .frame, .car.fixed .car-fig .frame.tall, .car.fixed .car-fig .frame.bare { display: block; aspect-ratio: 1 / 1; width: 100%; background: #fff; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+.car.fixed .car-fig .fr-bar { display: none; }
+.car.fixed .car-fig .frame img, .car.fixed .car-fig .frame.tall img, .car.fixed .car-fig .frame.bare img { width: 100%; height: 100%; max-height: none; aspect-ratio: auto; object-fit: contain; object-position: center; background: #fff; padding: 10px; }
+.car.fixed .car-fig figcaption { min-height: 98px; align-content: start; }
+.feat { margin-left: 10px; vertical-align: 2px; font-style: normal; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--violet); background: var(--lav); padding: 3px 9px; border-radius: 99px; }
+
+/* Testimonial slider: centred */
+#testimonials .head { text-align: center; margin-inline: auto; }
+.tq-wrap { margin-inline: auto; }
+.tq { text-align: center; }
+.tq figcaption { flex-direction: column; justify-content: center; align-items: center; gap: 10px; text-align: center; }
+.tq .tq-who { display: grid; gap: 2px; }
+.tq .t-av { width: 56px; height: 56px; }
+.tq em { margin: 4px 0 0; }
+@media (max-width: 600px) { .tq blockquote { font-size: 1.05rem; } }
+
+/* Client experience: who said it */
+.voices { display: flex; align-items: center; justify-content: center; gap: 18px; margin: -20px auto 52px; flex-wrap: wrap; text-align: left; }
+.av-stack { display: flex; }
+.av-stack .t-av { width: 44px; height: 44px; border: 3px solid var(--soft); box-shadow: 0 6px 14px -8px rgba(17, 27, 58, 0.5); margin-left: -12px; }
+.av-stack .t-av:first-child { margin-left: 0; }
+.voices p { margin: 0; font-size: 0.92rem; color: var(--ink); max-width: 420px; }
+.voices a { color: var(--blue); font-weight: 600; white-space: nowrap; }
+.voices a:hover { color: var(--indigo); }
+@media (max-width: 600px) { .voices { justify-content: flex-start; margin: -8px 0 36px; } }
+
+/* Our Work hero collage: three landscape site captures */
+.comp-c { left: 6%; width: 40%; }
+.comp-c img { aspect-ratio: 16 / 10 !important; object-position: top center !important; }
+@media (max-width: 600px) { .comp-c { width: 46%; } }

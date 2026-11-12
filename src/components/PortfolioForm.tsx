@@ -64,7 +64,7 @@ export default function PortfolioForm() {
         lead_source: 'Website',
         lead_type: 'Portfolio Request',
         lead_status: 'New',
-        source_page: 'Our Work — Complete Portfolio Request',
+        source_page: 'Our Work: Complete Portfolio Request',
       })
       setStatus('ok')
       setV(empty)

@@ -8,11 +8,14 @@ import '@fontsource/inter/600.css'
 import '@fontsource/inter/700.css'
 import './styles/site.css'
 import App from './App.tsx'
+import { EnquiryProvider } from './components/EnquiryModal'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
-      <App />
+      <EnquiryProvider>
+        <App />
+      </EnquiryProvider>
     </BrowserRouter>
   </StrictMode>,
 )

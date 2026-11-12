@@ -107,20 +107,41 @@ function WebScene({ id }: { id: string }) {
 }
 
 function BrandScene({ id }: { id: string }) {
+  const corners: [number, number][] = [[111, 65], [211, 65], [111, 165], [211, 165]]
   return (
     <svg viewBox="0 0 480 280" aria-hidden="true">
       <Defs id={id} />
-      <g style={{ mixBlendMode: 'multiply' }}>
-        <circle className="sc-pop" cx="130" cy="110" r="64" fill="#355aa8" opacity=".85" />
-        <circle className="sc-pop" cx="192" cy="110" r="64" fill="#6942a5" opacity=".85" />
-        <circle className="sc-pop" cx="161" cy="160" r="64" fill="#a9b4d0" opacity=".9" />
+      {/* artboard: a logo mark being refined, with its selection handles */}
+      <rect x="36" y="28" width="250" height="222" rx="16" fill="#fff" stroke="#e5e8f0" />
+      <circle className="sc-draw" cx="161" cy="115" r="38" pathLength={1} fill="none" stroke={`url(#${id}-g)`} strokeWidth="11" strokeLinecap="round" />
+      <circle className="sc-pop" cx="161" cy="115" r="13" fill={`url(#${id}-g)`} />
+      <circle className="sc-pop" cx="196" cy="84" r="6" fill="#168fea" />
+      <rect className="sc-fade" x="111" y="65" width="100" height="100" fill="none" stroke="#355aa8" strokeWidth="1.2" strokeDasharray="4 4" />
+      {corners.map(([x, y]) => <rect key={`${x}${y}`} className="sc-pop" x={x - 4} y={y - 4} width="8" height="8" rx="2" fill="#fff" stroke="#355aa8" strokeWidth="1.6" />)}
+      <rect className="sc-grow" x="106" y="190" width="110" height="12" rx="6" fill="#111b3a" />
+      <rect className="sc-grow" x="126" y="212" width="70" height="7" rx="3.5" fill="#e5e8f0" />
+      {/* type specimen */}
+      <g className="sc-pop">
+        <rect x="312" y="28" width="136" height="88" rx="14" fill="#fff" stroke="#e5e8f0" />
+        <text x="330" y="82" fontSize="46" fontWeight="800" fill="#111b3a" letterSpacing="-2">Aa</text>
+        <rect x="396" y="56" width="38" height="6" rx="3" fill="#e5e8f0" />
+        <rect x="396" y="70" width="28" height="6" rx="3" fill="#e5e8f0" />
+        <rect x="330" y="94" width="104" height="5" rx="2.5" fill="#f2f1fa" />
       </g>
-      <text className="sc-fade" x="318" y="132" fontSize="88" fontWeight="800" fill="#111b3a" letterSpacing="-4">Aa</text>
-      <rect className="sc-grow" x="318" y="150" width="110" height="8" rx="4" fill="#e5e8f0" />
-      <rect className="sc-grow" x="318" y="168" width="80" height="8" rx="4" fill="#e5e8f0" />
-      {['#355aa8', '#6942a5', '#111b3a', '#a9b4d0', '#f8f9fc'].map((c, i) => (
-        <rect key={c} className="sc-pop" x={60 + i * 72} y="226" width="56" height="30" rx="10" fill={c} stroke="#e5e8f0" />
-      ))}
+      {/* palette */}
+      <g>
+        <rect className="sc-fade" x="312" y="126" width="136" height="46" rx="14" fill="#fff" stroke="#e5e8f0" />
+        {['#355aa8', '#6942a5', '#111b3a', '#168fea'].map((c, i) => <circle key={c} className="sc-pop" cx={334 + i * 31} cy="149" r="11" fill={c} />)}
+      </g>
+      {/* identity applied: business card */}
+      <g className="sc-pop">
+        <rect x="312" y="182" width="136" height="68" rx="12" fill={`url(#${id}-g)`} />
+        <circle cx="336" cy="206" r="9" fill="none" stroke="#fff" strokeWidth="3" />
+        <circle cx="336" cy="206" r="3" fill="#fff" />
+        <rect x="352" y="202" width="64" height="6" rx="3" fill="#fff" opacity=".9" />
+        <rect x="328" y="228" width="84" height="4" rx="2" fill="#fff" opacity=".55" />
+        <rect x="328" y="238" width="58" height="4" rx="2" fill="#fff" opacity=".55" />
+      </g>
     </svg>
   )
 }

@@ -3,21 +3,21 @@ import { Marquee, Orbit, ServiceIcon } from '../components/graphics'
 import HeroCards from '../components/HeroCards'
 import Page from '../components/Page'
 import { Btn, Clients, FinalCTA, MoreLink, SectionHead, Tags } from '../components/ui'
-import { clients, industries, process, projects, services, whyPoints } from '../data/content'
+import { clients, industries, ORGS_SERVED, process, PROJECTS_DELIVERED, services, whyPoints } from '../data/content'
 
 const marquee = ['SEO', 'Google Ads', 'Meta Ads', 'Social Media', 'Lead Generation', 'Business Websites', 'Web Applications', 'Dashboards', 'Customer Portals', 'Brand Identity', 'Creative Design', 'Content Planning', 'CRM & Lead Management', 'Workflow Automation', 'Integrations', 'Internal Tools']
 
-const metrics: [number, string][] = [
-  [projects.length, 'Projects delivered'],
-  [clients.length, 'Organisations served'],
-  [industries.length, 'Industries'],
-  [services.length, 'Service areas'],
+const metrics: [number, string, string][] = [
+  [PROJECTS_DELIVERED, 'Projects delivered', '+'],
+  [ORGS_SERVED, 'Organisations served', '+'],
+  [industries.length, 'Industries', ''],
+  [services.length, 'Service areas', ''],
 ]
 
 export default function Home() {
   return (
     <Page
-      title="PlutoSolve — Marketing, Technology & Creative Solutions"
+      title="PlutoSolve, Marketing, Technology & Creative Solutions"
       description="PlutoSolve helps businesses grow with marketing, websites, technology, branding and business tools."
       path="/"
     >
@@ -42,12 +42,12 @@ export default function Home() {
         <div className="wrap">
           <div className="glance-head" data-reveal>
             <h2>Everything your business needs to grow, under one roof.</h2>
-            <p>PlutoSolve helps businesses with marketing, websites and technology, branding and creative work, and practical business tools — as individual requirements or as one joined-up project.</p>
+            <p>PlutoSolve helps businesses with marketing, websites and technology, branding and creative work, and practical business tools, as individual requirements or as one joined-up project.</p>
           </div>
           <div className="metrics" data-stagger>
-            {metrics.map(([n, label]) => (
+            {metrics.map(([n, label, suffix]) => (
               <div key={label}>
-                <strong data-count={n}>{n}</strong>
+                <strong data-count={n} data-suffix={suffix || undefined}>{n}{suffix}</strong>
                 <span>{label}</span>
               </div>
             ))}
@@ -74,7 +74,7 @@ export default function Home() {
 
       <section className="pad soft">
         <div className="wrap">
-          <SectionHead eyebrow="Selected clients" title="A few of the teams we’ve worked with." lede="Our experience spans education, media, consumer brands, hospitality, technology and more." />
+          <SectionHead eyebrow="Featured clients" title="A few of the teams we’ve worked with." lede="Our experience spans education, media, consumer brands, hospitality, technology and more." />
           <Clients items={clients} />
           <MoreLink to="/our-work">MEET OUR CLIENTS</MoreLink>
         </div>
@@ -83,9 +83,13 @@ export default function Home() {
       <section className="pad">
         <div className="wrap">
           <SectionHead eyebrow="Why PlutoSolve" title="More than one way to solve a business need." />
-          <div className="why" data-rule-draw>
-            {whyPoints.map(([h, p]) => (
-              <div key={h}><h3>{h}</h3><p>{p}</p></div>
+          <div className="why" data-stagger>
+            {whyPoints.map(([h, p], i) => (
+              <div className="card why-card" key={h}>
+                <span className="why-n" aria-hidden="true">0{i + 1}</span>
+                <h3>{h}</h3>
+                <p>{p}</p>
+              </div>
             ))}
           </div>
         </div>

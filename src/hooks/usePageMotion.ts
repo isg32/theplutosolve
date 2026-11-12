@@ -39,8 +39,9 @@ export function usePageMotion(scope: RefObject<HTMLElement | null>) {
       q('[data-count]').forEach((el) => {
         const end = Number(el.dataset.count)
         const o = { v: 0 }
-        el.textContent = '0'
-        gsap.to(o, { v: end, duration: 1.6, ease: 'power2.out', snap: { v: 1 }, onUpdate: () => (el.textContent = String(o.v)), scrollTrigger: trigger(el) })
+        const suf = el.dataset.suffix ?? ''
+        el.textContent = '0' + suf
+        gsap.to(o, { v: end, duration: 1.6, ease: 'power2.out', snap: { v: 1 }, onUpdate: () => (el.textContent = String(o.v) + suf), scrollTrigger: trigger(el) })
       })
 
       q('[data-scene]').forEach((el) => {

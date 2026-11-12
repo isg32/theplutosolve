@@ -1,6 +1,7 @@
 import { Link } from 'react-router'
 import logo from '../assets/logo.png'
 import { EMAIL, nav } from '../data/content'
+import { Social } from './ui'
 
 export default function Footer() {
   return (
@@ -29,6 +30,7 @@ export default function Footer() {
           <div>
             <h4>Contact</h4>
             <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+            <Social />
           </div>
         </div>
         <div className="copy">© 2026 PlutoSolve. All rights reserved.</div>

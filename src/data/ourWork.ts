@@ -20,7 +20,7 @@ export const client = {
   eyebrow: 'OUR CLIENT EXPERIENCE',
   headline: 'Built around different businesses. Driven by different challenges.',
   support:
-    "We've had the opportunity to work with businesses, brands and organisations across different categories—from education and technology to consumer brands, hospitality and professional services. Each engagement has brought a different brief, a different audience and a different problem to solve. That variety shapes the way we think, plan and deliver.",
+    "We've had the opportunity to work with businesses, brands and organisations across different categories, from education and technology to consumer brands, hospitality and professional services. Each engagement has brought a different brief, a different audience and a different problem to solve. That variety shapes the way we think, plan and deliver.",
   logos: 'A few names from our journey',
   note: 'Selected clients and organisations',
 }
@@ -31,7 +31,7 @@ export const industry = {
   support:
     'The way a school reaches students is different from the way a consumer brand earns attention or a service business converts enquiries. We work across varied business environments, adapting the strategy, technology and creative approach to the needs of each audience and organisation.',
   closing:
-    'Our experience across sectors helps us bring useful ideas from one business context into another—while keeping every solution relevant to the people it is designed for.',
+    'Our experience across sectors helps us bring useful ideas from one business context into another, while keeping every solution relevant to the people it is designed for.',
 }
 
 export type Block = { title?: string; text: string }
@@ -51,11 +51,11 @@ export const websites: Capability = {
   eyebrow: 'WEBSITES & DIGITAL PLATFORMS',
   headline: 'Digital experiences built around the way your business works.',
   intro:
-    'A website should do more than look good. It should explain what you offer, make it easy for people to take the next step and support the way your business operates. We plan and build digital experiences around real business requirements—from straightforward company websites to content-rich platforms and feature-led web applications.',
+    'A website should do more than look good. It should explain what you offer, make it easy for people to take the next step and support the way your business operates. We plan and build digital experiences around real business requirements, from straightforward company websites to content-rich platforms and feature-led web applications.',
   blocks: [
     {
       title: 'From a strong first impression to a platform built to do more.',
-      text: 'Our website work spans business and corporate websites, landing pages, e-commerce experiences, WordPress builds, content-led websites and custom web platforms. We consider structure, user journeys, responsive behaviour, content management, integrations, search visibility and performance as part of the overall build—not as afterthoughts.',
+      text: 'Our website work spans business and corporate websites, landing pages, e-commerce experiences, WordPress builds, content-led websites and custom web platforms. We consider structure, user journeys, responsive behaviour, content management, integrations, search visibility and performance as part of the overall build, not as afterthoughts.',
     },
     {
       title: 'How we approach a build',
@@ -63,7 +63,7 @@ export const websites: Capability = {
     },
     {
       title: 'Technology and tools',
-      text: 'Our development approach is selected around the project—not forced into a single stack. Depending on the brief, a build may involve HTML, CSS, JavaScript, WordPress, content-management systems, frontend and backend frameworks, databases, APIs, hosting and deployment services, analytics and AI-assisted development tools.',
+      text: 'Our development approach is selected around the project, not forced into a single stack. Depending on the brief, a build may involve HTML, CSS, JavaScript, WordPress, content-management systems, frontend and backend frameworks, databases, APIs, hosting and deployment services, analytics and AI-assisted development tools.',
     },
     {
       title: 'Scale and performance',
@@ -115,21 +115,21 @@ export const marketing: Capability = {
     'Being visible is only the beginning. Businesses need the right message, the right audience and a clear path from discovery to enquiry or purchase. We bring strategy, content, performance campaigns and measurement together to help brands build visibility, generate demand and make better use of their marketing investment.',
   blocks: [
     {
-      text: 'Our work can cover the full marketing journey—from understanding the market and shaping the message to building campaigns, improving digital touchpoints and reviewing performance. We combine creative thinking with data so that marketing activity has a clear purpose and a way to measure progress.',
+      text: 'Our work can cover the full marketing journey, from understanding the market and shaping the message to building campaigns, improving digital touchpoints and reviewing performance. We combine creative thinking with data so that marketing activity has a clear purpose and a way to measure progress.',
     },
     {
       title: 'How we measure progress',
       text: 'The right measure depends on the business objective. We may track qualified leads, cost per lead, conversion rate, website traffic, search visibility, reach, engagement, customer acquisition cost, revenue contribution or return on advertising spend. We focus on the metrics that help explain whether the work is moving the business in the right direction.',
     },
     {
-      text: 'We believe good reporting should make performance understandable—not hide it behind impressive-looking numbers. Where campaign or business data is available, we present the starting point, the period measured, the work undertaken and the result. This gives context to the numbers and helps distinguish activity from actual impact.',
+      text: 'We believe good reporting should make performance understandable, not hide it behind impressive-looking numbers. Where campaign or business data is available, we present the starting point, the period measured, the work undertaken and the result. This gives context to the numbers and helps distinguish activity from actual impact.',
     },
   ],
   tags: [
     'Marketing strategy & consulting', 'SEO', 'Google Ads', 'Meta Ads', 'Social media management', 'Content planning', 'Paid campaigns',
     'Lead generation', 'Landing pages', 'Conversion journeys', 'Analytics & reporting', 'Campaign optimisation',
   ],
-  visualHeading: 'Strategy, creative and performance—working together',
+  visualHeading: 'Strategy, creative and performance, working together',
 }
 
 export const creative: Capability = {

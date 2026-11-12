@@ -1,18 +1,7 @@
 import Page from '../components/Page'
 import { FinalCTA, PageHead } from '../components/ui'
+import Avatar from '../components/Avatar'
 import { testimonials, type Testimonial } from '../data/content'
-import { workImages } from '../data/workImages'
-
-const initials = (n: string) => n.split(' ').map((w) => w[0]).join('').slice(0, 2).toUpperCase()
-
-function Person({ t, size = 52 }: { t: Testimonial; size?: number }) {
-  const src = t.photo ? workImages[t.photo] : undefined
-  return src ? (
-    <img className="t-av" src={src} alt="" width={size} height={size} loading="lazy" />
-  ) : (
-    <span className="t-av ini" aria-hidden="true" style={{ width: size, height: size }}>{initials(t.name)}</span>
-  )
-}
 
 function Quote({ t }: { t: Testimonial }) {
   return (
@@ -20,7 +9,7 @@ function Quote({ t }: { t: Testimonial }) {
       <svg className="qmark" viewBox="0 0 32 24" aria-hidden="true"><path d="M0 24V13.5C0 5.6 4.3 1 12 0v4.6C8 5.5 6.2 8 6.2 11H12V24H0zm20 0V13.5C20 5.6 24.3 1 32 0v4.6c-4 .9-5.8 3.4-5.8 6.4H32V24H20z" /></svg>
       <blockquote>{t.quote}</blockquote>
       <figcaption>
-        <Person t={t} />
+        <Avatar t={t} />
         <div><strong>{t.name}</strong><span>{t.role}</span></div>
         <em>{t.service}</em>
       </figcaption>
@@ -32,7 +21,7 @@ export default function Testimonials() {
   const [lead, ...rest] = testimonials
   return (
     <Page
-      title="Testimonials — PlutoSolve"
+      title="Testimonials | PlutoSolve"
       description="What clients say about working with PlutoSolve across marketing, websites, branding and business tools."
       path="/testimonials"
     >
@@ -44,7 +33,7 @@ export default function Testimonials() {
             <svg className="qmark" viewBox="0 0 32 24" aria-hidden="true"><path d="M0 24V13.5C0 5.6 4.3 1 12 0v4.6C8 5.5 6.2 8 6.2 11H12V24H0zm20 0V13.5C20 5.6 24.3 1 32 0v4.6c-4 .9-5.8 3.4-5.8 6.4H32V24H20z" /></svg>
             <blockquote>{lead.quote}</blockquote>
             <figcaption>
-              <Person t={lead} size={60} />
+              <Avatar t={lead} size={60} />
               <div><strong>{lead.name}</strong><span>{lead.role}</span></div>
               <em>{lead.service}</em>
             </figcaption>

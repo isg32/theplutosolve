@@ -1,9 +1,9 @@
 import Page from '../components/Page'
-import { Btn } from '../components/ui'
+import { Btn, EnquiryBtn } from '../components/ui'
 
 export default function NotFound() {
   return (
-    <Page title="Page not found — PlutoSolve" description="The page you’re looking for doesn’t exist." path="/404">
+    <Page title="Page not found | PlutoSolve" description="The page you’re looking for doesn’t exist." path="/404">
       <section className="nf wrap">
         <span className="eyebrow" data-hero-item>Error 404</span>
         <div className="big grad" data-hero-item>404</div>
@@ -11,7 +11,7 @@ export default function NotFound() {
         <p data-hero-item>The link may be broken or the page may have been removed. Let’s get you back on track.</p>
         <div className="cta" data-hero-item>
           <Btn to="/">Back to home</Btn>
-          <Btn to="/contact" variant="s" arrow={false}>Contact us</Btn>
+          <EnquiryBtn variant="s" arrow={false}>Contact us</EnquiryBtn>
         </div>
       </section>
     </Page>

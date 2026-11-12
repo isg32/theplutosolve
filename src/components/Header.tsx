@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router'
 import logo from '../assets/logo.png'
 import { nav } from '../data/content'
+import { useEnquiry } from './EnquiryModal'
 
 export default function Header() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const { open: openEnquiry } = useEnquiry()
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false)
@@ -32,9 +34,9 @@ export default function Header() {
           {nav.map((n) => (
             <NavLink key={n.to} to={n.to} end className={({ isActive }) => (isActive ? 'on' : '')}>{n.label}</NavLink>
           ))}
-          <Link className="nav-cta mb" to="/contact">Let’s Talk</Link>
+          <button type="button" className="btn p nav-btn mb" onClick={() => { setOpen(false); openEnquiry() }}>Let’s Talk <span className="arr" aria-hidden="true">→</span></button>
         </nav>
-        <Link className="nav-cta" to="/contact">Let’s Talk</Link>
+        <button type="button" className="btn p nav-btn" onClick={openEnquiry}>Let’s Talk <span className="arr" aria-hidden="true">→</span></button>
       </div>
     </header>
   )

@@ -33,7 +33,7 @@ function handlePortfolio(d) {
   ]).appendRow([
     now, 'Website', 'Portfolio Request', 'New', d.area_of_interest || '',
     d.full_name, d.work_email, d.company_name || '', d.phone_number || '', d.project_context || '',
-    d.source_page || 'Our Work — Complete Portfolio Request',
+    d.source_page || 'Our Work: Complete Portfolio Request',
   ]);
 
   const firstName = String(d.full_name || '').trim().split(/\s+/)[0] || 'there';
@@ -57,7 +57,7 @@ function handlePortfolio(d) {
   MailApp.sendEmail({
     to: TEAM_EMAIL,
     replyTo: d.work_email,
-    subject: 'New portfolio request — ' + d.full_name,
+    subject: 'New portfolio request: ' + d.full_name,
     body:
       'Name: ' + d.full_name + '\n' +
       'Work email: ' + d.work_email + '\n' +
@@ -66,7 +66,7 @@ function handlePortfolio(d) {
       'Area of interest: ' + (d.area_of_interest || '') + '\n' +
       'Project context: ' + (d.project_context || '') + '\n' +
       'Submitted at: ' + now.toISOString() + '\n' +
-      'Source page: Our Work — Complete Portfolio Request',
+      'Source page: Our Work: Complete Portfolio Request',
   });
   return ContentService.createTextOutput('ok');
 }
