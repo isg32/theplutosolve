@@ -889,3 +889,5 @@ form.card.in-modal > h3 { display: none; }
 .comp-c { left: 6%; width: 40%; }
 .comp-c img { aspect-ratio: 16 / 10 !important; object-position: top center !important; }
 @media (max-width: 600px) { .comp-c { width: 46%; } }
+@media (max-width: 600px) { .why { grid-template-columns: 1fr; } }
+@media (max-width: 960px) { .cap-visual { max-width: 560px; margin-inline: auto; width: 100%; } }
